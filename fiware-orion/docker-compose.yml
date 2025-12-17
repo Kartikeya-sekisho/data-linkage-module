@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+
+  mongo:
+    image: mongo:4.4
+    container_name: fiware-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    command: ["--bind_ip_all"]
+
+  orion:
+    image: fiware/orion:3.10.1
+    container_name: fiware-orion
+    depends_on:
+      - mongo
+    ports:
+      - "1026:1026"
+    command: >
+      -dbhost mongo
+      -noCache
+      -logLevel INFO
+
+
+volumes:
+  mongo-data:

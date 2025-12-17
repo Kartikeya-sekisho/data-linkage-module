@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>つくば市データ連携｜表示専用（A-1～B-5）</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f6f8fb; --card: #fff; --border: #e1e6ef; --text: #1f2d3d; --accent: #254e9b;
+    }
+    body { margin: 0; font-family: system-ui, "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif; background: var(--bg); color: var(--text); }
+    header { background: var(--card); border-bottom: 1px solid var(--border); padding: 16px 20px; }
+    h1 { margin: 0; font-size: 18px; }
+    .sub { color: #6b7a90; font-size: 12px; }
+    main { max-width: 740px; margin: 0 auto; padding: 20px; }
+    .status { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; color: #506080; font-size: 12px; flex-wrap: wrap; }
+    .status-error { color: #d32f2f; font-weight: 600; }
+    .status-success { color: #388e3c; font-weight: 600; }
+    .grid { display: grid; gap: 16px; grid-template-columns: repeat(2, 1fr); }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+    .label { font-size: 13px; color: #506080; }
+    .value { font-size: 22px; font-weight: 600; }
+    .help  { font-size: 12px; color: #6b7a90; }
+    @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>つくば市データ連携｜表示専用（A-1～B-5）</h1>
+    <div class="sub">本番APIから自動取得して表示します（CSV取込・編集機能なし）</div>
+  </header>
+
+  <main>
+    <div class="status">
+      <div>最終更新：<span id="lastUpdated">—</span></div>
+      <div>取得状態：<span id="fetchStatus">待機中</span></div>
+      <div>更新間隔：<span id="refreshIntervalLabel">5分</span></div>
+    </div>
+
+    <div class="grid">
+      <!-- A-1 人口 -->
+      <div class="card">
+        <div class="label">つくば市_人口（<code>tsukubaCityPopulation</code>）</div>
+        <div class="value" id="v-pop">—</div>
+        <div class="help">例：259,618人</div>
+      </div>
+      <!-- A-2 人口時点 -->
+      <div class="card">
+        <div class="label">つくば市_人口時点（<code>tsukubaCityPopulationDate</code>）</div>
+        <div class="value" id="v-pop-date">—</div>
+        <div class="help">例：令和6年10月1日現在</div>
+      </div>
+      <!-- A-3 世帯数 -->
+      <div class="card">
+        <div class="label">つくば市_世帯数（<code>tsukubaCityHouseholds</code>）</div>
+        <div class="value" id="v-house">—</div>
+        <div class="help">例：123,733世帯</div>
+      </div>
+      <!-- B-1 研究機関数 -->
+      <div class="card">
+        <div class="label">研究機関数（<code>kenkyuGakuenResearchInstitutions</code>）</div>
+        <div class="value" id="v-inst">—</div>
+        <div class="help">例：150</div>
+      </div>
+      <!-- B-2 研究関係者数 -->
+      <div class="card">
+        <div class="label">研究関係者数（<code>kenkyuGakuenResearchPerson</code>）</div>
+        <div class="value" id="v-person">—</div>
+        <div class="help">例：20,000人</div>
+      </div>
+      <!-- B-3 博士号保持者数 -->
+      <div class="card">
+        <div class="label">博士号保持者数（<code>kenkyuGakuenDoctorateHolder</code>）</div>
+        <div class="value" id="v-doctor">—</div>
+        <div class="help">例：8,000人</div>
+      </div>
+      <!-- B-4 外国人数 -->
+      <div class="card">
+        <div class="label">外国人数（<code>kenkyuGakuenForeigner</code>）</div>
+        <div class="value" id="v-foreign">—</div>
+        <div class="help">例：12,000人</div>
+      </div>
+      <!-- B-5 大学生数 -->
+      <div class="card">
+        <div class="label">大学生数（<code>kenkyuGakuenUniversityStudents</code>）</div>
+        <div class="value" id="v-student">—</div>
+        <div class="help">例：18,000人</div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // ====== 設定 ======
+    const API_ENDPOINT = "http://localhost:8080/api.php";
+    const REFRESH_INTERVAL_MS = 5 * 60 * 1000; // 5分ごとに自動更新
+
+    // ====== 書式ユーティリティ ======
+    const formatInt = (n) => {
+      if (n === null || n === undefined || n === "") return "—";
+      const v = Number(n);
+      return Number.isFinite(v) ? v.toLocaleString("ja-JP") : String(n);
+    };
+    const appendUnit = (text, unit) => text === "—" ? "—" : `${text}${unit}`;
+
+    function formatWareki(dateStr) {
+      if (!dateStr) return "—";
+      const s = String(dateStr).replace(/-/g, "/");
+      const m = s.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
+      if (!m) return dateStr;
+      const y = +m[1], mo = +m[2], d = +m[3];
+      let era = "", ey = y;
+      if (y >= 2019) { era = "令和"; ey = y - 2018; }
+      else if (y >= 1989) { era = "平成"; ey = y - 1988; }
+      else if (y >= 1926) { era = "昭和"; ey = y - 1925; }
+      else { return `${y}年${mo}月${d}日現在`; }
+      return `${era}${ey}年${mo}月${d}日現在`;
+    }
+
+    // ====== 画面反映 ======
+    function render(data) {
+      console.log('Rendering data:', data);
+      
+      // Case-insensitive key lookup helper
+      const getValue = (obj, key) => {
+        if (!obj) return null;
+        // Try exact match first
+        if (obj[key] !== undefined) return obj[key];
+        // Try lowercase match
+        const lowerKey = key.toLowerCase();
+        if (obj[lowerKey] !== undefined) return obj[lowerKey];
+        // Try case-insensitive search
+        for (const k in obj) {
+          if (k.toLowerCase() === lowerKey) return obj[k];
+        }
+        return null;
+      };
+
+      document.getElementById("v-pop").textContent =
+        appendUnit(formatInt(getValue(data, 'tsukubacitypopulation')), "人");
+
+      document.getElementById("v-pop-date").textContent =
+        formatWareki(getValue(data, 'tsukubacitypopulationdate'));
+
+      document.getElementById("v-house").textContent =
+        appendUnit(formatInt(getValue(data, 'tsukubacityhouseholds')), "世帯");
+
+      document.getElementById("v-inst").textContent =
+        formatInt(getValue(data, 'kenkyugakuenresearchinstitutions'));
+
+      document.getElementById("v-person").textContent =
+        appendUnit(formatInt(getValue(data, 'kenkyugakuenresearchperson')), "人");
+
+      document.getElementById("v-doctor").textContent =
+        appendUnit(formatInt(getValue(data, 'kenkyugakuendoctorateholder')), "人");
+
+      document.getElementById("v-foreign").textContent =
+        appendUnit(formatInt(getValue(data, 'kenkyugakuenforeigner')), "人");
+
+      document.getElementById("v-student").textContent =
+        appendUnit(formatInt(getValue(data, 'kenkyugakuenuniversitystudents')), "人");
+    }
+
+    function setStatus(text, isError = false) {
+      const el = document.getElementById("fetchStatus");
+      el.textContent = text;
+      el.className = isError ? 'status-error' : (text === '成功' ? 'status-success' : '');
+    }
+    
+    function setLastUpdated(date) {
+      const s = date
+        ? new Date(date).toLocaleString("ja-JP", { hour12: false })
+        : "—";
+      document.getElementById("lastUpdated").textContent = s;
+    }
+
+    // ====== データ取得（自動） ======
+    async function fetchAndRender() {
+      try {
+        setStatus("取得中…");
+        console.log('Fetching data from:', API_ENDPOINT);
+        
+        const res = await fetch(API_ENDPOINT, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          cache: "no-cache",
+        });
+        
+        console.log('Response status:', res.status);
+        
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}`);
+        }
+        
+        const text = await res.text();
+        console.log('Response text:', text);
+        
+        if (!text) {
+          throw new Error('Empty response from server');
+        }
+        
+        const json = JSON.parse(text);
+        console.log('Parsed JSON:', json);
+
+        // Check for error response
+        if (json.status === 'error') {
+          throw new Error(json.message || "Unknown Error");
+        }
+        
+        render(json);
+        setLastUpdated(Date.now());
+        setStatus("成功");
+      } catch (e) {
+        console.error('Fetch error:', e);
+        setStatus("失敗：" + e.message, true);
+      }
+    }
+
+    // 初期化：ページ読込直後に取得
+    document.getElementById("refreshIntervalLabel").textContent =
+      `${Math.round(REFRESH_INTERVAL_MS / 60000)}分`;
+    
+    // Initial fetch
+    fetchAndRender();
+
+    // 定期更新（自動）
+    setInterval(fetchAndRender, REFRESH_INTERVAL_MS);
+  </script>
+</body>
+</html>

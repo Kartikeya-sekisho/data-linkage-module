@@ -1,0 +1,794 @@
+[2025-12-15 17:50:50] [INFO] ACTION get-mapping START
+[2025-12-15 17:50:50] [INFO] ACTION get-mapping SUCCESS count=41
+[2025-12-15 17:50:50] [INFO] ACTION fetch_orion START
+[2025-12-15 17:50:50] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41 RAW=/mnt/c/Users/kartikeya_singh/Desktop/docker_project/data-linkage/public/data/raw/raw_orion_20251215_175050.json MAPPED=session
+[2025-12-15 17:50:50] [INFO] ACTION fetch-orion SUCCESS. entities=1 attributes=41
+[2025-12-15 17:51:20] [INFO] ACTION upload-csv START
+[2025-12-15 17:51:20] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=12
+[2025-12-15 17:51:20] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=12
+[2025-12-15 17:51:20] [INFO] ACTION get-mapping START
+[2025-12-15 17:51:20] [INFO] ACTION get-mapping SUCCESS count=41
+[2025-12-15 17:51:20] [INFO] ACTION fetch_orion START
+[2025-12-15 17:51:20] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41 RAW=/mnt/c/Users/kartikeya_singh/Desktop/docker_project/data-linkage/public/data/raw/raw_orion_20251215_175120.json MAPPED=session
+[2025-12-15 17:51:20] [INFO] ACTION fetch-orion SUCCESS. entities=1 attributes=41
+[2025-12-15 17:51:49] [INFO] ACTION push-json START url=http://localhost:8080/api.php
+[2025-12-15 17:51:49] [INFO] ACTION push-json RESULT http_code=200, error=
+[2025-12-15 17:58:27] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-15 17:58:27] [INFO] ACTION get_mapping START
+[2025-12-15 17:58:27] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-15 17:58:27] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-15 17:58:27] [INFO] ACTION fetch_orion START
+[2025-12-15 17:58:27] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41 RAW=/mnt/c/Users/kartikeya_singh/Desktop/docker_project/data-linkage/public/data/raw/raw_orion_20251215_175827.json MAPPED=session
+[2025-12-15 17:58:27] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-15 17:58:37] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-15 17:58:37] [INFO] ACTION upload_csv START
+[2025-12-15 17:58:38] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-15 17:58:38] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-15 17:58:38] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-15 17:58:38] [INFO] ACTION get_mapping START
+[2025-12-15 17:58:38] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-15 17:58:38] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-15 17:58:38] [INFO] ACTION fetch_orion START
+[2025-12-15 17:58:38] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41 RAW=/mnt/c/Users/kartikeya_singh/Desktop/docker_project/data-linkage/public/data/raw/raw_orion_20251215_175838.json MAPPED=session
+[2025-12-15 17:58:38] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-15 17:58:43] [INFO] API_REQUEST method=POST action=push_json ip=127.0.0.1
+[2025-12-15 17:58:43] [ERROR] ACTION push_json BLOCKED due to TYPE_MISMATCH keys=tsukubadistrictbirthrate
+[2025-12-15 18:01:32] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-15 18:01:32] [INFO] ACTION get_mapping START
+[2025-12-15 18:01:32] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-15 18:01:33] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-15 18:01:33] [INFO] ACTION fetch_orion START
+[2025-12-15 18:01:33] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41 RAW=/mnt/c/Users/kartikeya_singh/Desktop/docker_project/data-linkage/public/data/raw/raw_orion_20251215_180133.json MAPPED=session
+[2025-12-15 18:01:33] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-15 18:01:38] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-15 18:01:38] [INFO] ACTION upload_csv START
+[2025-12-15 18:01:38] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-15 18:01:38] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-15 18:01:39] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-15 18:01:39] [INFO] ACTION get_mapping START
+[2025-12-15 18:01:39] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-15 18:01:39] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-15 18:01:39] [INFO] ACTION fetch_orion START
+[2025-12-15 18:01:39] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41 RAW=/mnt/c/Users/kartikeya_singh/Desktop/docker_project/data-linkage/public/data/raw/raw_orion_20251215_180139.json MAPPED=session
+[2025-12-15 18:01:39] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-15 18:01:43] [INFO] API_REQUEST method=POST action=push_json ip=127.0.0.1
+[2025-12-15 18:01:43] [INFO] ACTION push_json START url=http://localhost:8080/api.php
+[2025-12-15 18:01:43] [INFO] ACTION push_json RESULT http_code=200 error=none
+[2025-12-15 18:01:58] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-15 18:01:58] [INFO] ACTION get_mapping START
+[2025-12-15 18:01:58] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-15 18:01:58] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-15 18:01:58] [INFO] ACTION fetch_orion START
+[2025-12-15 18:01:58] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41 RAW=/mnt/c/Users/kartikeya_singh/Desktop/docker_project/data-linkage/public/data/raw/raw_orion_20251215_180158.json MAPPED=session
+[2025-12-15 18:01:58] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-15 18:02:14] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-15 18:02:14] [INFO] ACTION upload_csv START
+[2025-12-15 18:02:14] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=12
+[2025-12-15 18:02:14] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=12
+[2025-12-15 18:02:14] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-15 18:02:14] [INFO] ACTION get_mapping START
+[2025-12-15 18:02:14] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-15 18:02:15] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-15 18:02:15] [INFO] ACTION fetch_orion START
+[2025-12-15 18:02:15] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41 RAW=/mnt/c/Users/kartikeya_singh/Desktop/docker_project/data-linkage/public/data/raw/raw_orion_20251215_180215.json MAPPED=session
+[2025-12-15 18:02:15] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-15 18:02:18] [INFO] API_REQUEST method=POST action=push_json ip=127.0.0.1
+[2025-12-15 18:02:18] [INFO] ACTION push_json START url=http://localhost:8080/api.php
+[2025-12-15 18:02:18] [INFO] ACTION push_json RESULT http_code=200 error=none
+[2025-12-15 18:08:25] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-15 18:08:25] [INFO] ACTION get_mapping START
+[2025-12-15 18:08:25] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-15 18:08:25] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-15 18:08:25] [INFO] ACTION fetch_orion START
+[2025-12-15 18:08:25] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41 RAW=/mnt/c/Users/kartikeya_singh/Desktop/docker_project/data-linkage/public/data/raw/raw_orion_20251215_180825.json MAPPED=session
+[2025-12-15 18:08:25] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-15 18:09:21] [INFO] API_REQUEST method=POST action=orion_add_attr ip=127.0.0.1
+[2025-12-15 18:09:21] [INFO] ACTION orion_add_attr START key=sampleDate type=DateTime
+[2025-12-15 18:09:21] [INFO] ACTION orion_add_attr SUCCESS http_code=204 mapping=updated
+[2025-12-15 18:09:21] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-15 18:09:21] [INFO] ACTION get_mapping START
+[2025-12-15 18:09:21] [INFO] ACTION get_mapping SUCCESS count=42
+[2025-12-15 18:09:22] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-15 18:09:22] [INFO] ACTION fetch_orion START
+[2025-12-15 18:09:22] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=42 RAW=/mnt/c/Users/kartikeya_singh/Desktop/docker_project/data-linkage/public/data/raw/raw_orion_20251215_180922.json MAPPED=session
+[2025-12-15 18:09:22] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=42
+[2025-12-15 18:09:48] [INFO] API_REQUEST method=POST action=orion_delete_attr ip=127.0.0.1
+[2025-12-15 18:09:48] [INFO] ACTION orion_delete_attr START key=sampleDate
+[2025-12-15 18:09:48] [INFO] ACTION orion_delete_attr RESULT http_code=204 removed_mapping=true
+[2025-12-15 18:09:49] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-15 18:09:49] [INFO] ACTION get_mapping START
+[2025-12-15 18:09:49] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-15 18:09:49] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-15 18:09:49] [INFO] ACTION fetch_orion START
+[2025-12-15 18:09:49] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41 RAW=/mnt/c/Users/kartikeya_singh/Desktop/docker_project/data-linkage/public/data/raw/raw_orion_20251215_180949.json MAPPED=session
+[2025-12-15 18:09:49] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 13:12:48] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 13:12:48] [INFO] ACTION get_mapping START
+[2025-12-16 13:12:48] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 13:12:49] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 13:12:49] [INFO] ACTION fetch_orion START
+[2025-12-16 13:12:49] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41 RAW=/mnt/c/Users/kartikeya_singh/Desktop/docker_project/data-linkage/public/data/raw/raw_orion_20251216_131249.json MAPPED=session
+[2025-12-16 13:12:49] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 13:13:34] [INFO] API_REQUEST method=POST action=orion_add_attr ip=127.0.0.1
+[2025-12-16 13:13:34] [INFO] ACTION orion_add_attr START key=sampleDate type=DateTime
+[2025-12-16 13:13:34] [INFO] ACTION orion_add_attr SUCCESS http_code=204 mapping=updated
+[2025-12-16 13:13:35] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 13:13:35] [INFO] ACTION get_mapping START
+[2025-12-16 13:13:35] [INFO] ACTION get_mapping SUCCESS count=42
+[2025-12-16 13:13:35] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 13:13:35] [INFO] ACTION fetch_orion START
+[2025-12-16 13:13:35] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=42 RAW=/mnt/c/Users/kartikeya_singh/Desktop/docker_project/data-linkage/public/data/raw/raw_orion_20251216_131335.json MAPPED=session
+[2025-12-16 13:13:35] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=42
+[2025-12-16 13:17:32] [INFO] API_REQUEST method=POST action=orion_delete_attr ip=127.0.0.1
+[2025-12-16 13:17:32] [INFO] ACTION orion_delete_attr START key=sampleDate
+[2025-12-16 13:17:32] [INFO] ACTION orion_delete_attr RESULT http_code=204 removed_mapping=true
+[2025-12-16 13:17:33] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 13:17:33] [INFO] ACTION get_mapping START
+[2025-12-16 13:17:33] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 13:17:33] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 13:17:33] [INFO] ACTION fetch_orion START
+[2025-12-16 13:17:33] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41 RAW=/mnt/c/Users/kartikeya_singh/Desktop/docker_project/data-linkage/public/data/raw/raw_orion_20251216_131733.json MAPPED=session
+[2025-12-16 13:17:33] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 14:12:15] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 14:12:15] [INFO] ACTION get_mapping START
+[2025-12-16 14:12:15] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 14:12:15] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 14:12:15] [INFO] ACTION fetch_orion START
+[2025-12-16 14:12:15] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 14:12:15] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 14:12:46] [INFO] API_REQUEST method=POST action=orion_add_attr ip=127.0.0.1
+[2025-12-16 14:12:46] [INFO] ACTION orion_add_attr START key=sampleDate type=Text
+[2025-12-16 14:12:46] [INFO] ACTION orion_add_attr SUCCESS http_code=204 mapping=updated
+[2025-12-16 14:12:46] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 14:12:46] [INFO] ACTION get_mapping START
+[2025-12-16 14:12:46] [INFO] ACTION get_mapping SUCCESS count=42
+[2025-12-16 14:12:47] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 14:12:47] [INFO] ACTION fetch_orion START
+[2025-12-16 14:12:47] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=42
+[2025-12-16 14:12:47] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=42
+[2025-12-16 14:13:32] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 14:13:32] [INFO] ACTION upload_csv START
+[2025-12-16 14:13:33] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=12
+[2025-12-16 14:13:33] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=12
+[2025-12-16 14:13:33] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 14:13:33] [INFO] ACTION get_mapping START
+[2025-12-16 14:13:33] [INFO] ACTION get_mapping SUCCESS count=42
+[2025-12-16 14:13:33] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 14:13:33] [INFO] ACTION fetch_orion START
+[2025-12-16 14:13:33] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=42
+[2025-12-16 14:13:33] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=42
+[2025-12-16 14:13:39] [INFO] API_REQUEST method=POST action=push_json ip=127.0.0.1
+[2025-12-16 14:13:39] [INFO] ACTION push_json START url=http://localhost:8080/api.php
+[2025-12-16 14:13:39] [INFO] ACTION push_json RESULT http_code=200 error=none
+[2025-12-16 14:13:49] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 14:13:49] [INFO] ACTION get_mapping START
+[2025-12-16 14:13:49] [INFO] ACTION get_mapping SUCCESS count=42
+[2025-12-16 14:13:49] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 14:13:49] [INFO] ACTION fetch_orion START
+[2025-12-16 14:13:49] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=42
+[2025-12-16 14:13:49] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=42
+[2025-12-16 14:13:59] [INFO] API_REQUEST method=POST action=orion_delete_attr ip=127.0.0.1
+[2025-12-16 14:13:59] [INFO] ACTION orion_delete_attr START key=sampleDate
+[2025-12-16 14:13:59] [INFO] ACTION orion_delete_attr RESULT http_code=204 removed_mapping=true
+[2025-12-16 14:13:59] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 14:13:59] [INFO] ACTION get_mapping START
+[2025-12-16 14:13:59] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 14:14:00] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 14:14:00] [INFO] ACTION fetch_orion START
+[2025-12-16 14:14:00] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 14:14:00] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 14:14:25] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 14:14:25] [INFO] ACTION upload_csv START
+[2025-12-16 14:14:25] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 14:14:25] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 14:14:25] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 14:14:25] [INFO] ACTION get_mapping START
+[2025-12-16 14:14:25] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 14:14:26] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 14:14:26] [INFO] ACTION fetch_orion START
+[2025-12-16 14:14:26] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 14:14:26] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 14:14:36] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 14:14:36] [INFO] ACTION get_mapping START
+[2025-12-16 14:14:36] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 14:14:36] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 14:14:36] [INFO] ACTION fetch_orion START
+[2025-12-16 14:14:36] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 14:14:36] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 14:36:00] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 14:36:00] [INFO] ACTION upload_csv START
+[2025-12-16 14:36:00] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=12
+[2025-12-16 14:36:00] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=12
+[2025-12-16 14:36:00] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 14:36:00] [INFO] ACTION get_mapping START
+[2025-12-16 14:36:00] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 14:36:00] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 14:36:00] [INFO] ACTION fetch_orion START
+[2025-12-16 14:36:00] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 14:36:00] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 14:36:06] [INFO] API_REQUEST method=POST action=push_json ip=127.0.0.1
+[2025-12-16 14:36:06] [INFO] ACTION push_json START url=http://localhost:8080/api.php
+[2025-12-16 14:36:06] [INFO] ACTION push_json RESULT http_code=200 error=none
+[2025-12-16 14:52:15] [INFO] API_REQUEST method=POST action=push_json ip=127.0.0.1
+[2025-12-16 14:52:15] [INFO] ACTION push_json START url=http://localhost:8080/api.php
+[2025-12-16 14:52:15] [INFO] ACTION push_json RESULT http_code=200 error=none
+[2025-12-16 14:54:48] [INFO] API_REQUEST method=POST action=push_json ip=127.0.0.1
+[2025-12-16 14:54:48] [INFO] ACTION push_json START url=http://localhost:8080/api.php
+[2025-12-16 14:54:48] [INFO] ACTION push_json RESULT http_code=200 error=none
+[2025-12-16 14:58:55] [INFO] API_REQUEST method=POST action=push_json ip=127.0.0.1
+[2025-12-16 14:58:55] [INFO] ACTION push_json START url=http://localhost:8080/api.php
+[2025-12-16 14:58:55] [INFO] ACTION push_json RESULT http_code=200 error=none
+[2025-12-16 15:57:17] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 15:57:17] [INFO] ACTION get_mapping START
+[2025-12-16 15:57:17] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 15:57:17] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 15:57:17] [INFO] ACTION fetch_orion START
+[2025-12-16 15:57:17] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 15:57:17] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 15:57:24] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 15:57:24] [INFO] ACTION upload_csv START
+[2025-12-16 15:57:24] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=12
+[2025-12-16 15:57:24] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=12
+[2025-12-16 15:57:25] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 15:57:25] [INFO] ACTION get_mapping START
+[2025-12-16 15:57:25] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 15:57:25] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 15:57:25] [INFO] ACTION fetch_orion START
+[2025-12-16 15:57:25] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 15:57:25] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 15:57:29] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 15:57:29] [INFO] ACTION get_mapping START
+[2025-12-16 15:57:29] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 15:57:30] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 15:57:30] [INFO] ACTION fetch_orion START
+[2025-12-16 15:57:30] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 15:57:30] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 15:57:35] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 15:57:35] [INFO] ACTION upload_csv START
+[2025-12-16 15:57:36] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 15:57:36] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 15:57:36] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 15:57:36] [INFO] ACTION get_mapping START
+[2025-12-16 15:57:36] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 15:57:36] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 15:57:36] [INFO] ACTION fetch_orion START
+[2025-12-16 15:57:36] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 15:57:36] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 15:57:40] [INFO] API_REQUEST method=POST action=push_json ip=127.0.0.1
+[2025-12-16 15:57:40] [INFO] ACTION push_json START url=http://localhost:8080/api.php
+[2025-12-16 15:57:41] [INFO] ACTION push_json RESULT http_code=200 error=none
+[2025-12-16 15:57:57] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 15:57:57] [INFO] ACTION get_mapping START
+[2025-12-16 15:57:57] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 15:57:57] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 15:57:57] [INFO] ACTION fetch_orion START
+[2025-12-16 15:57:57] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 15:57:57] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 15:58:01] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 15:58:01] [INFO] ACTION upload_csv START
+[2025-12-16 15:58:01] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 15:58:01] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 15:58:01] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 15:58:01] [INFO] ACTION get_mapping START
+[2025-12-16 15:58:01] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 15:58:01] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 15:58:01] [INFO] ACTION fetch_orion START
+[2025-12-16 15:58:01] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 15:58:01] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 15:58:04] [INFO] API_REQUEST method=POST action=push_json ip=127.0.0.1
+[2025-12-16 15:58:04] [ERROR] ACTION push_json BLOCKED due to TYPE_MISMATCH keys=basedatafinancialindexvalue,basedatamandatoryexpensesreference
+[2025-12-16 15:58:08] [INFO] API_REQUEST method=POST action=push_json ip=127.0.0.1
+[2025-12-16 15:58:08] [ERROR] ACTION push_json BLOCKED due to TYPE_MISMATCH keys=basedatafinancialindexvalue,basedatamandatoryexpensesreference
+[2025-12-16 16:00:11] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:00:11] [INFO] ACTION get_mapping START
+[2025-12-16 16:00:11] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:00:11] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:00:11] [INFO] ACTION fetch_orion START
+[2025-12-16 16:00:11] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:00:11] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:00:51] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 16:00:51] [INFO] ACTION upload_csv START
+[2025-12-16 16:00:52] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 16:00:52] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 16:00:52] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:00:52] [INFO] ACTION get_mapping START
+[2025-12-16 16:00:52] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:00:52] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:00:52] [INFO] ACTION fetch_orion START
+[2025-12-16 16:00:52] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:00:52] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:01:59] [INFO] API_REQUEST method=POST action=push_json ip=127.0.0.1
+[2025-12-16 16:01:59] [INFO] ACTION push_json START url=http://localhost:8080/api.php
+[2025-12-16 16:01:59] [INFO] ACTION push_json RESULT http_code=200 error=none
+[2025-12-16 16:02:14] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:02:14] [INFO] ACTION get_mapping START
+[2025-12-16 16:02:14] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:02:15] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:02:15] [INFO] ACTION fetch_orion START
+[2025-12-16 16:02:15] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:02:15] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:02:20] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 16:02:20] [INFO] ACTION upload_csv START
+[2025-12-16 16:02:20] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 16:02:20] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 16:02:21] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:02:21] [INFO] ACTION get_mapping START
+[2025-12-16 16:02:21] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:02:21] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:02:21] [INFO] ACTION fetch_orion START
+[2025-12-16 16:02:21] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:02:21] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:02:27] [INFO] API_REQUEST method=POST action=push_json ip=127.0.0.1
+[2025-12-16 16:02:27] [ERROR] ACTION push_json BLOCKED due to TYPE_MISMATCH keys=basedatafinancialindexvalue,basedatamandatoryexpensesreference
+[2025-12-16 16:02:41] [INFO] API_REQUEST method=POST action=push_json ip=127.0.0.1
+[2025-12-16 16:02:41] [ERROR] ACTION push_json BLOCKED due to TYPE_MISMATCH keys=basedatafinancialindexvalue,basedatamandatoryexpensesreference
+[2025-12-16 16:03:34] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:03:34] [INFO] ACTION get_mapping START
+[2025-12-16 16:03:34] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:03:34] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:03:34] [INFO] ACTION fetch_orion START
+[2025-12-16 16:03:34] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:03:34] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:04:55] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 16:04:55] [INFO] ACTION upload_csv START
+[2025-12-16 16:04:56] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 16:04:56] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 16:04:56] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:04:56] [INFO] ACTION get_mapping START
+[2025-12-16 16:04:56] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:04:56] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:04:56] [INFO] ACTION fetch_orion START
+[2025-12-16 16:04:56] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:04:56] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:06:12] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:06:12] [INFO] ACTION get_mapping START
+[2025-12-16 16:06:12] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:06:12] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:06:12] [INFO] ACTION fetch_orion START
+[2025-12-16 16:06:12] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:06:12] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:06:26] [INFO] API_REQUEST method=POST action=orion_add_attr ip=127.0.0.1
+[2025-12-16 16:06:26] [INFO] ACTION orion_add_attr START key=sampleDate type=Text
+[2025-12-16 16:06:26] [INFO] ACTION orion_add_attr SUCCESS http_code=204 mapping=updated
+[2025-12-16 16:06:27] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:06:27] [INFO] ACTION get_mapping START
+[2025-12-16 16:06:27] [INFO] ACTION get_mapping SUCCESS count=42
+[2025-12-16 16:06:27] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:06:27] [INFO] ACTION fetch_orion START
+[2025-12-16 16:06:27] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=42
+[2025-12-16 16:06:27] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=42
+[2025-12-16 16:10:20] [INFO] API_REQUEST method=POST action=orion_delete_attr ip=127.0.0.1
+[2025-12-16 16:10:20] [INFO] ACTION orion_delete_attr START key=sampleDate
+[2025-12-16 16:10:20] [INFO] ACTION orion_delete_attr RESULT http_code=204 removed_mapping=true
+[2025-12-16 16:10:20] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:10:20] [INFO] ACTION get_mapping START
+[2025-12-16 16:10:20] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:10:21] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:10:21] [INFO] ACTION fetch_orion START
+[2025-12-16 16:10:21] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:10:21] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:39:39] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:39:39] [INFO] ACTION get_mapping START
+[2025-12-16 16:39:39] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:39:39] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:39:39] [INFO] ACTION fetch_orion START
+[2025-12-16 16:39:39] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:39:39] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:40:01] [INFO] API_REQUEST method=POST action=orion_add_attr ip=127.0.0.1
+[2025-12-16 16:40:01] [INFO] ACTION orion_add_attr START key=sampleDate type=Text
+[2025-12-16 16:40:01] [INFO] ACTION orion_add_attr SUCCESS http_code=204 mapping=updated
+[2025-12-16 16:40:02] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:40:02] [INFO] ACTION get_mapping START
+[2025-12-16 16:40:02] [INFO] ACTION get_mapping SUCCESS count=42
+[2025-12-16 16:40:02] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:40:02] [INFO] ACTION fetch_orion START
+[2025-12-16 16:40:02] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=42
+[2025-12-16 16:40:02] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=42
+[2025-12-16 16:40:09] [INFO] API_REQUEST method=POST action=orion_delete_attr ip=127.0.0.1
+[2025-12-16 16:40:09] [INFO] ACTION orion_delete_attr START key=sampleDate
+[2025-12-16 16:40:10] [INFO] ACTION orion_delete_attr RESULT http_code=204 removed_mapping=true
+[2025-12-16 16:40:10] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:40:10] [INFO] ACTION get_mapping START
+[2025-12-16 16:40:10] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:40:10] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:40:10] [INFO] ACTION fetch_orion START
+[2025-12-16 16:40:10] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:40:10] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:40:30] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 16:40:30] [INFO] ACTION upload_csv START
+[2025-12-16 16:40:30] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=12
+[2025-12-16 16:40:30] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=12
+[2025-12-16 16:40:30] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:40:30] [INFO] ACTION get_mapping START
+[2025-12-16 16:40:30] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:40:30] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:40:30] [INFO] ACTION fetch_orion START
+[2025-12-16 16:40:30] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:40:30] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:40:34] [INFO] API_REQUEST method=POST action=push_json ip=127.0.0.1
+[2025-12-16 16:40:34] [INFO] ACTION push_json START url=http://localhost:8080/api.php
+[2025-12-16 16:40:34] [INFO] ACTION push_json RESULT http_code=200 error=none
+[2025-12-16 16:40:42] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:40:42] [INFO] ACTION get_mapping START
+[2025-12-16 16:40:42] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:40:42] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:40:42] [INFO] ACTION fetch_orion START
+[2025-12-16 16:40:42] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:40:42] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:40:47] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 16:40:47] [INFO] ACTION upload_csv START
+[2025-12-16 16:40:47] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 16:40:47] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 16:40:47] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:40:47] [INFO] ACTION get_mapping START
+[2025-12-16 16:40:47] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:40:48] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:40:48] [INFO] ACTION fetch_orion START
+[2025-12-16 16:40:48] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:40:48] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:41:08] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:41:08] [INFO] ACTION get_mapping START
+[2025-12-16 16:41:08] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:41:09] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:41:09] [INFO] ACTION fetch_orion START
+[2025-12-16 16:41:09] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:41:09] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:42:37] [INFO] API_REQUEST method=POST action=orion_add_attr ip=127.0.0.1
+[2025-12-16 16:42:37] [INFO] ACTION orion_add_attr START key=sampleDate type=Text
+[2025-12-16 16:42:37] [INFO] ACTION orion_add_attr SUCCESS http_code=204 mapping=updated
+[2025-12-16 16:42:37] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:42:37] [INFO] ACTION get_mapping START
+[2025-12-16 16:42:37] [INFO] ACTION get_mapping SUCCESS count=42
+[2025-12-16 16:42:37] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:42:37] [INFO] ACTION fetch_orion START
+[2025-12-16 16:42:37] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=42
+[2025-12-16 16:42:37] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=42
+[2025-12-16 16:42:48] [INFO] API_REQUEST method=POST action=orion_delete_attr ip=127.0.0.1
+[2025-12-16 16:42:48] [INFO] ACTION orion_delete_attr START key=sampleDate
+[2025-12-16 16:42:48] [INFO] ACTION orion_delete_attr RESULT http_code=204 removed_mapping=true
+[2025-12-16 16:42:48] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:42:48] [INFO] ACTION get_mapping START
+[2025-12-16 16:42:48] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:42:48] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:42:48] [INFO] ACTION fetch_orion START
+[2025-12-16 16:42:48] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:42:48] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:43:07] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 16:43:07] [INFO] ACTION upload_csv START
+[2025-12-16 16:43:07] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 16:43:07] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 16:43:08] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:43:08] [INFO] ACTION get_mapping START
+[2025-12-16 16:43:08] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:43:08] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:43:08] [INFO] ACTION fetch_orion START
+[2025-12-16 16:43:08] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:43:08] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:45:30] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:45:30] [INFO] ACTION get_mapping START
+[2025-12-16 16:45:30] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:45:30] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:45:30] [INFO] ACTION fetch_orion START
+[2025-12-16 16:45:30] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:45:30] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:45:37] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 16:45:37] [INFO] ACTION upload_csv START
+[2025-12-16 16:45:37] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 16:45:37] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 16:45:37] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:45:37] [INFO] ACTION get_mapping START
+[2025-12-16 16:45:37] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:45:38] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:45:38] [INFO] ACTION fetch_orion START
+[2025-12-16 16:45:38] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:45:38] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:47:44] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:47:44] [INFO] ACTION get_mapping START
+[2025-12-16 16:47:44] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:47:44] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:47:44] [INFO] ACTION fetch_orion START
+[2025-12-16 16:47:44] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:47:44] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:47:49] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 16:47:49] [INFO] ACTION upload_csv START
+[2025-12-16 16:47:51] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 16:47:51] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 16:47:51] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:47:51] [INFO] ACTION get_mapping START
+[2025-12-16 16:47:51] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:47:51] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:47:51] [INFO] ACTION fetch_orion START
+[2025-12-16 16:47:51] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:47:51] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:48:06] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:48:06] [INFO] ACTION get_mapping START
+[2025-12-16 16:48:06] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:48:06] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:48:06] [INFO] ACTION fetch_orion START
+[2025-12-16 16:48:06] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:48:06] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:48:12] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 16:48:12] [INFO] ACTION upload_csv START
+[2025-12-16 16:48:12] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 16:48:12] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 16:48:12] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:48:12] [INFO] ACTION get_mapping START
+[2025-12-16 16:48:12] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:48:12] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:48:12] [INFO] ACTION fetch_orion START
+[2025-12-16 16:48:12] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:48:12] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:49:14] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:49:14] [INFO] ACTION get_mapping START
+[2025-12-16 16:49:14] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:49:14] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:49:14] [INFO] ACTION fetch_orion START
+[2025-12-16 16:49:14] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:49:14] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:49:19] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 16:49:19] [INFO] ACTION upload_csv START
+[2025-12-16 16:49:19] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 16:49:19] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 16:49:19] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:49:19] [INFO] ACTION get_mapping START
+[2025-12-16 16:49:20] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:49:20] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:49:20] [INFO] ACTION fetch_orion START
+[2025-12-16 16:49:20] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:49:20] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:49:26] [INFO] API_REQUEST method=POST action=push_json ip=127.0.0.1
+[2025-12-16 16:49:26] [ERROR] ACTION push_json BLOCKED due to TYPE_MISMATCH keys=basedatafinancialindexvalue,basedatamandatoryexpensesreference
+[2025-12-16 16:49:53] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:49:53] [INFO] ACTION get_mapping START
+[2025-12-16 16:49:53] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:49:53] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:49:53] [INFO] ACTION fetch_orion START
+[2025-12-16 16:49:53] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:49:53] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:50:18] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:50:18] [INFO] ACTION get_mapping START
+[2025-12-16 16:50:18] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:50:18] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:50:18] [INFO] ACTION fetch_orion START
+[2025-12-16 16:50:18] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:50:19] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:51:18] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 16:51:18] [INFO] ACTION upload_csv START
+[2025-12-16 16:51:18] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 16:51:18] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 16:51:18] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:51:18] [INFO] ACTION get_mapping START
+[2025-12-16 16:51:18] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:51:19] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:51:19] [INFO] ACTION fetch_orion START
+[2025-12-16 16:51:19] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:51:19] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:51:33] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:51:33] [INFO] ACTION get_mapping START
+[2025-12-16 16:51:33] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:51:33] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:51:33] [INFO] ACTION fetch_orion START
+[2025-12-16 16:51:33] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:51:33] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:51:38] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 16:51:38] [INFO] ACTION upload_csv START
+[2025-12-16 16:51:38] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 16:51:38] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 16:51:38] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:51:38] [INFO] ACTION get_mapping START
+[2025-12-16 16:51:38] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:51:39] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:51:39] [INFO] ACTION fetch_orion START
+[2025-12-16 16:51:39] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:51:39] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:52:50] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:52:50] [INFO] ACTION get_mapping START
+[2025-12-16 16:52:50] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:52:50] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:52:50] [INFO] ACTION fetch_orion START
+[2025-12-16 16:52:50] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:52:50] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:53:14] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 16:53:14] [INFO] ACTION upload_csv START
+[2025-12-16 16:53:15] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 16:53:15] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 16:53:15] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:53:15] [INFO] ACTION get_mapping START
+[2025-12-16 16:53:15] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:53:15] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:53:15] [INFO] ACTION fetch_orion START
+[2025-12-16 16:53:15] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:53:15] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:54:41] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:54:41] [INFO] ACTION get_mapping START
+[2025-12-16 16:54:41] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:54:42] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:54:42] [INFO] ACTION fetch_orion START
+[2025-12-16 16:54:42] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:54:42] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 16:54:46] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 16:54:46] [INFO] ACTION upload_csv START
+[2025-12-16 16:54:46] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 16:54:46] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 16:54:47] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 16:54:47] [INFO] ACTION get_mapping START
+[2025-12-16 16:54:47] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 16:54:47] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 16:54:47] [INFO] ACTION fetch_orion START
+[2025-12-16 16:54:47] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 16:54:47] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 17:10:35] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 17:10:35] [INFO] ACTION get_mapping START
+[2025-12-16 17:10:35] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 17:10:35] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 17:10:35] [INFO] ACTION fetch_orion START
+[2025-12-16 17:10:35] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 17:10:35] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 17:10:47] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 17:10:47] [INFO] ACTION upload_csv START
+[2025-12-16 17:10:47] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 17:10:47] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 17:10:48] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 17:10:48] [INFO] ACTION get_mapping START
+[2025-12-16 17:10:48] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 17:10:48] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 17:10:48] [INFO] ACTION fetch_orion START
+[2025-12-16 17:10:48] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 17:10:48] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 17:12:04] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 17:12:05] [INFO] ACTION get_mapping START
+[2025-12-16 17:12:05] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 17:12:05] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 17:12:05] [INFO] ACTION fetch_orion START
+[2025-12-16 17:12:05] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 17:12:05] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 17:12:11] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 17:12:11] [INFO] ACTION upload_csv START
+[2025-12-16 17:12:11] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=12
+[2025-12-16 17:12:11] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=12
+[2025-12-16 17:12:11] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 17:12:12] [INFO] ACTION get_mapping START
+[2025-12-16 17:12:12] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 17:12:12] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 17:12:12] [INFO] ACTION fetch_orion START
+[2025-12-16 17:12:12] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 17:12:12] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 17:12:15] [INFO] API_REQUEST method=POST action=push_json ip=127.0.0.1
+[2025-12-16 17:12:15] [INFO] ACTION push_json START url=http://localhost:8080/api.php
+[2025-12-16 17:12:15] [INFO] ACTION push_json RESULT http_code=200 error=none
+[2025-12-16 17:12:17] [INFO] API_REQUEST method=POST action=push_json ip=127.0.0.1
+[2025-12-16 17:12:17] [INFO] ACTION push_json START url=http://localhost:8080/api.php
+[2025-12-16 17:12:17] [INFO] ACTION push_json RESULT http_code=200 error=none
+[2025-12-16 17:12:24] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 17:12:24] [INFO] ACTION upload_csv START
+[2025-12-16 17:12:24] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 17:12:24] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 17:12:24] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 17:12:24] [INFO] ACTION get_mapping START
+[2025-12-16 17:12:24] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 17:12:24] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 17:12:24] [INFO] ACTION fetch_orion START
+[2025-12-16 17:12:24] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 17:12:24] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 17:13:47] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 17:13:47] [INFO] ACTION get_mapping START
+[2025-12-16 17:13:47] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 17:13:47] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 17:13:47] [INFO] ACTION fetch_orion START
+[2025-12-16 17:13:47] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 17:13:47] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 17:13:52] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 17:13:52] [INFO] ACTION upload_csv START
+[2025-12-16 17:13:52] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 17:13:52] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 17:13:52] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 17:13:52] [INFO] ACTION get_mapping START
+[2025-12-16 17:13:52] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 17:13:53] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 17:13:53] [INFO] ACTION fetch_orion START
+[2025-12-16 17:13:53] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 17:13:53] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 17:21:37] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 17:21:37] [INFO] ACTION get_mapping START
+[2025-12-16 17:21:37] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 17:21:37] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 17:21:37] [INFO] ACTION fetch_orion START
+[2025-12-16 17:21:37] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 17:21:37] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 17:21:43] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 17:21:43] [INFO] ACTION upload_csv START
+[2025-12-16 17:21:44] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 17:21:44] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 17:21:44] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 17:21:44] [INFO] ACTION get_mapping START
+[2025-12-16 17:21:44] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 17:21:44] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 17:21:44] [INFO] ACTION fetch_orion START
+[2025-12-16 17:21:44] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 17:21:45] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 17:22:44] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 17:22:44] [INFO] ACTION get_mapping START
+[2025-12-16 17:22:44] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 17:22:44] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 17:22:45] [INFO] ACTION fetch_orion START
+[2025-12-16 17:22:45] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 17:22:45] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 17:22:48] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 17:22:48] [INFO] ACTION upload_csv START
+[2025-12-16 17:22:48] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 17:22:48] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 17:22:49] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 17:22:49] [INFO] ACTION get_mapping START
+[2025-12-16 17:22:49] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 17:22:49] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 17:22:49] [INFO] ACTION fetch_orion START
+[2025-12-16 17:22:49] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 17:22:49] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 17:27:08] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 17:27:08] [INFO] ACTION get_mapping START
+[2025-12-16 17:27:08] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 17:27:08] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 17:27:08] [INFO] ACTION fetch_orion START
+[2025-12-16 17:27:08] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 17:27:08] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 17:27:14] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 17:27:15] [INFO] ACTION upload_csv START
+[2025-12-16 17:27:15] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 17:27:15] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 17:27:15] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 17:27:15] [INFO] ACTION get_mapping START
+[2025-12-16 17:27:15] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 17:27:16] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 17:27:16] [INFO] ACTION fetch_orion START
+[2025-12-16 17:27:16] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 17:27:16] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 17:28:39] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 17:28:39] [INFO] ACTION get_mapping START
+[2025-12-16 17:28:39] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 17:28:39] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 17:28:39] [INFO] ACTION fetch_orion START
+[2025-12-16 17:28:39] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 17:28:39] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 17:28:45] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 17:28:45] [INFO] ACTION upload_csv START
+[2025-12-16 17:28:46] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 17:28:46] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 17:28:46] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 17:28:46] [INFO] ACTION get_mapping START
+[2025-12-16 17:28:46] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 17:28:46] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 17:28:46] [INFO] ACTION fetch_orion START
+[2025-12-16 17:28:46] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 17:28:46] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 17:34:14] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 17:34:14] [INFO] ACTION get_mapping START
+[2025-12-16 17:34:14] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 17:34:14] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 17:34:14] [INFO] ACTION fetch_orion START
+[2025-12-16 17:34:14] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 17:34:14] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-16 17:34:18] [INFO] API_REQUEST method=POST action=upload_csv ip=127.0.0.1
+[2025-12-16 17:34:18] [INFO] ACTION upload_csv START
+[2025-12-16 17:34:19] [INFO] CSV_PIPELINE SUMMARY status=success entities=1 attributes=41
+[2025-12-16 17:34:19] [INFO] ACTION upload_csv SUCCESS entities=1 attributes=41
+[2025-12-16 17:34:19] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-16 17:34:19] [INFO] ACTION get_mapping START
+[2025-12-16 17:34:19] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-16 17:34:19] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-16 17:34:19] [INFO] ACTION fetch_orion START
+[2025-12-16 17:34:19] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-16 17:34:19] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-17 09:39:20] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-17 09:39:20] [INFO] ACTION get_mapping START
+[2025-12-17 09:39:20] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-17 09:39:20] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-17 09:39:20] [INFO] ACTION fetch_orion START
+[2025-12-17 09:39:20] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-17 09:39:20] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41
+[2025-12-17 09:39:28] [INFO] API_REQUEST method=GET action=get_mapping ip=127.0.0.1
+[2025-12-17 09:39:28] [INFO] ACTION get_mapping START
+[2025-12-17 09:39:28] [INFO] ACTION get_mapping SUCCESS count=41
+[2025-12-17 09:39:28] [INFO] API_REQUEST method=GET action=fetch_orion ip=127.0.0.1
+[2025-12-17 09:39:28] [INFO] ACTION fetch_orion START
+[2025-12-17 09:39:28] [INFO] FETCH_ORION: Service=sekisho ServicePath=/ Entities=1 Attributes=41
+[2025-12-17 09:39:28] [INFO] ACTION fetch_orion SUCCESS entities=1 attributes=41

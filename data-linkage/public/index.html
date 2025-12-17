@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>Orionデータプレビュー(編集:追加・削除)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: system-ui, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif; margin: 24px; color: #222; }
+    h1 { font-size: 28px; margin: 0 0 18px; font-weight: 700; }
+    h2 { font-size: 18px; margin: 0 0 12px; font-weight: 600; }
+    .section { margin: 20px 0; }
+    label { display: inline-block; margin: 6px 0; font-weight: 600; }
+    select, input[type="file"], button, input[type="text"] { padding: 6px; font-size: 14px; }
+    .hint { font-size: 12px; color: #555; margin-top:6px; }
+    .actions { margin-top: 12px; display: flex; gap: 8px; align-items:center; flex-wrap: wrap; }
+    table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+    caption.hint { text-align: left; font-size: 12px; color: #666; padding-bottom: 6px; }
+    th, td { border: 1px solid #ccc; padding: 8px 10px; text-align: left; vertical-align: middle; font-size: 13px; }
+    th { background: #f5f5f5; font-weight: 600; }
+    #message { margin-top: 8px; font-size: 14px; color: #333; }
+    .error-message { color: #d32f2f; font-weight: 600; }
+
+    .add-form { padding: 10px; border: 1px dashed #aaa; margin-top: 10px; display: none; }
+    .add-form label { font-weight: 500; }
+    .add-form input, .add-form select { margin-right: 8px; }
+
+    .left-actions { display: flex; gap: 8px; align-items: center; }
+    .bottom-actions { margin-top: 16px; }
+
+    /* GREEN highlight when only value differs */
+    .row-value-changed { background-color: #a0e3af; }
+    tbody tr.row-value-changed > td { background-color: #a0e3af; }
+
+    /* RED highlight when type differs */
+    .row-type-mismatch { background-color: #fab3b9; }
+    tbody tr.row-type-mismatch > td { background-color: #fab3b9; }
+
+    /* ----------- MODE TOGGLES ----------- */
+    /* Orion-only: hide CSV columns, show 操作 column; add/delete visible; register hidden */
+    #previewTable.orion-only thead th.csv-col,
+    #previewTable.orion-only tbody td.csv-col { display: none; }
+
+    /* Orion–CSV: show CSV columns, hide 操作 column and all delete buttons, hide Add button, show Register */
+    #previewTable.orion-csv thead th.ops-col,
+    #previewTable.orion-csv tbody td.ops-col { display: none; }
+    .hide-in-csv { display: none; } /* attach to elements we must hide in orion-csv */
+
+    /* Register button bigger & centered */
+    .register-container { display: flex; justify-content: center; align-items: center; }
+    .register-btn {
+      font-size: 18px;
+      padding: 10px 24px;
+      border-radius: 6px;
+      background: #254e9b;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    .register-btn.hidden { display: none; }
+
+    /* Add button positioned below table on left */
+    .add-button-container {
+      margin-top: 16px;
+      text-align: left;
+    }
+    .add-button-container.hidden { display: none; }
+
+    /* Type mismatch error dialog */
+    .error-dialog {
+      position: relative;
+      background: #fab3b9;
+      border: 2px solid #ab4850;
+      border-radius: 6px;
+      padding: 16px 40px 16px 16px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .error-dialog.visible { display: block; }
+    .error-dialog-title {
+      font-weight: 600;
+      color: black;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    .error-dialog-content {
+      color: black;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .error-dialog-close {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #ab4850;
+      cursor: pointer;
+      padding: 4px 8px;
+      line-height: 1;
+    }
+    .error-dialog-close:hover {
+      color: #8b3b42;
+    }
+
+    @media (max-width: 640px) {
+      th, td { padding: 6px 8px; font-size: 12px; }
+      .actions { flex-direction: column; align-items: stretch; }
+      .left-actions { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Orionデータプレビュー</h1>
+
+  <!-- FIWARE context -->
+  <div class="section" aria-labelledby="fiware-context">
+    <h2 id="fiware-context">FIWAREコンテキスト選択</h2>
+    <div class="left-actions">
+      <div>
+        <label for="fiwareService">Fiware-Service</label><br />
+        <select id="fiwareService" name="fiwareService" required>
+          <option value="" selected disabled>選択してください</option>
+          <option value="tsukuba-analytics">tsukuba-analytics</option>
+          <option value="sekisho">sekisho</option>
+        </select>
+      </div>
+      <button type="button" id="btnFetch">Orion再取得</button>
+    </div>
+    <div class="hint">削除・追加は固定エンティティ(ID/Type)に対して実行されます。</div>
+  </div>
+
+  <!-- CSV upload -->
+  <div class="section" aria-labelledby="csv-select">
+    <h2 id="csv-select">CSVファイル選択</h2>
+    <input type="file" id="csv_file" name="csv_file" accept=".csv" />
+    <div class="actions">
+      <button type="button" id="btnPreviewCsv">読み込む</button>
+      <button type="button" id="btnClearCsv">クリア</button>
+      <span id="fileName" style="color:#444; font-size:13px;"></span>
+    </div>
+    <div class="hint">
+      ※Excel「画面イメージ」に沿ったヘッダを推奨: <code>項目名,設定する値</code>
+    </div>
+  </div>
+
+  <!-- Preview -->
+  <div class="section" aria-labelledby="preview">
+    <h2 id="preview">プレビュー</h2>
+
+    <!-- Type Mismatch Error Dialog -->
+    <div id="errorDialog" class="error-dialog">
+      <button class="error-dialog-close" onclick="document.getElementById('errorDialog').classList.remove('visible')" aria-label="閉じる">×</button>
+      <div class="error-dialog-title">データ型の不一致が検出されました。以下の項目にエラーがあります：</div>
+      <div class="error-dialog-content" id="errorDialogContent"></div>
+    </div>
+
+    <table id="previewTable" class="orion-only" aria-describedby="preview-desc">
+      <caption id="preview-desc" class="hint">
+        列構成(Orionのみ): 項目名 / Key / Orion Data Type / Orion Data / 操作(削除)<br />
+        列構成(Orion–CSV): 項目名 / Key / Orion Data Type / Orion Data / CSV Data Type / CSV Data
+      </caption>
+      <thead>
+        <tr>
+          <th>項目名</th>
+          <th>Key</th>
+          <th>Orion Data Type</th>
+          <th>Orion Data</th>
+          <th class="csv-col">CSV Data Type</th>
+          <th class="csv-col">CSV Data</th>
+          <th class="ops-col">操作</th>
+        </tr>
+      </thead>
+      <tbody id="previewBody"></tbody>
+    </table>
+
+    <!-- Add button below table on left (visible only in Orion-only mode) -->
+    <div id="addButtonContainer" class="add-button-container">
+      <button type="button" id="btnAdd">追加</button>
+    </div>
+
+    <!-- Centered BIG Register (visible only in Orion–CSV mode) -->
+    <div class="bottom-actions register-container">
+      <button type="button" id="btnRegister" class="register-btn hidden">登録</button>
+    </div>
+
+    <!-- Inline Add Form -->
+    <div id="addForm" class="add-form" role="region" aria-label="属性追加フォーム">
+      <div style="margin-bottom:8px;"><strong>新規属性の追加</strong></div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+        <label>項目名</label>
+        <input type="text" id="addJpName" placeholder="例:つくば市_人口時点" />
+        <label>Key</label>
+        <input type="text" id="addKey" placeholder="例:tsukubaCityPopulationDate" />
+        <label>Orion data type</label>
+        <select id="addType">
+          <option value="Text">Text</option>
+          <option value="Integer">Integer</option>
+          <option value="Float">Float</option>
+          <option value="DateTime">DateTime</option>
+        </select>
+        <label>Orion Data</label>
+        <input type="text" id="addValue" placeholder="値(型に合わせて入力)" />
+        <button type="button" id="btnAddConfirm">確認</button>
+        <button type="button" id="btnAddCancel">キャンセル</button>
+      </div>
+      <div class="hint">Keyは英数字とアンダースコアのみ。DateTimeはISO8601(例:2025-10-01T00:00:00Z)。</div>
+    </div>
+  </div>
+
+  <div id="message" class="section" aria-live="polite"></div>
+
+  <script>
+    // Endpoints 
+    const API_FETCH_ORION = '/app/api.php?action=fetch_orion';
+    const API_GET_MAPPING = '/app/api.php?action=get_mapping';
+    const API_DELETE_ATTR = '/app/api.php?action=orion_delete_attr';
+    const API_ADD_ATTR    = '/app/api.php?action=orion_add_attr';
+    const API_PUSH_JSON   = '/app/api.php?action=push_json';
+    const PUSH_TARGET_URL = 'http://localhost:8080/api.php';
+
+    // DOM 
+    const fiwareSelect  = document.getElementById('fiwareService');
+    const btnFetch      = document.getElementById('btnFetch');
+    const btnAdd        = document.getElementById('btnAdd');
+    const addButtonContainer = document.getElementById('addButtonContainer');
+    const addForm       = document.getElementById('addForm');
+    const addJpName     = document.getElementById('addJpName');
+    const addKey        = document.getElementById('addKey');
+    const addType       = document.getElementById('addType');
+    const addValue      = document.getElementById('addValue');
+    const btnAddConfirm = document.getElementById('btnAddConfirm');
+    const btnAddCancel  = document.getElementById('btnAddCancel');
+
+    const csvFileInput  = document.getElementById('csv_file');
+    const btnPreviewCsv = document.getElementById('btnPreviewCsv');
+    const btnClearCsv   = document.getElementById('btnClearCsv');
+    const fileNameSpan  = document.getElementById('fileName');
+
+    const previewTable  = document.getElementById('previewTable');
+    const previewBody   = document.getElementById('previewBody');
+    const btnRegister   = document.getElementById('btnRegister');
+    const messageBox    = document.getElementById('message');
+    const errorDialog   = document.getElementById('errorDialog');
+    const errorDialogContent = document.getElementById('errorDialogContent');
+
+    // State
+    let orionDataFormatB = null;
+    let csvDataFormatB   = null;
+    let engToJpMapping   = {};
+    let mappingLoaded    = false;
+
+    // Track type mismatch globally for register behavior
+    let hasTypeMismatch = false;
+    let mismatchedItems = []; // Store mismatched item names
+
+    // Mapping reverse (key -> jp) 
+    async function loadMappingReverse() {
+      try {
+        const res = await fetch(API_GET_MAPPING, { method: 'GET' });
+        if (!res.ok) throw new Error(`Mapping fetch error (${res.status})`);
+        const json = await res.json();
+        if (json.status !== 'success' || !json.map) throw new Error(json.message || 'Invalid mapping response');
+        const reverse = {};
+        Object.entries(json.map).forEach(([jp, info]) => {
+          if (info && info.key) reverse[String(info.key).toLowerCase()] = jp;
+        });
+        engToJpMapping = reverse;
+        mappingLoaded  = true;
+      } catch (e) {
+        console.error(e);
+        mappingLoaded = false;
+      }
+    }
+
+    // Orion fetch
+    async function fetchOrionForService(service) {
+      const url = `${API_FETCH_ORION}&service=${encodeURIComponent(service)}`;
+      const res = await fetch(url, { method: 'GET' });
+      if (!res.ok) throw new Error(`Orion fetch error (${res.status})`);
+      const json = await res.json();
+      if (json.status === 'error') throw new Error(json.message || 'Orion API error');
+      return json.preview || [];
+    }
+
+    // CSV upload
+    async function uploadCsvFileToServer(file) {
+      const fd = new FormData();
+      fd.append('csv_file', file);
+      const res = await fetch('/app/api.php?action=upload_csv', { method: 'POST', body: fd });
+      if (!res.ok) throw new Error('Upload failed');
+      const json = await res.json();
+      if (json.status === 'error') throw new Error(json.message || 'Validation failed');
+      return json.preview || [];
+    }
+
+    // Flatten Format B
+    function flattenFormatB(entities) {
+      const rows = [];
+      if (!Array.isArray(entities)) return rows;
+      entities.forEach(entity => {
+        const attributes = entity?.attributes ?? {};
+        Object.keys(attributes).forEach(attrKey => {
+          const attr = attributes[attrKey] ?? {};
+          const jpName = engToJpMapping[String(attrKey).toLowerCase()] ?? attrKey;
+          rows.push({
+            jp_name: jpName,
+            key: attrKey,
+            type: attr.type ?? 'Text',
+            value: attr.value !== undefined ? attr.value : ''
+          });
+        });
+      });
+      return rows;
+    }
+
+    // Build lookup by key 
+    function buildLookup(rows) {
+      const map = {};
+      rows?.forEach(r => { map[String(r.key).toLowerCase()] = r; });
+      return map;
+    }
+
+    // Comparison helpers
+    function isMissing(v) {
+      const s = String(v ?? '').trim();
+      return s === '' || s === '—' || s === '-' || s === '–';
+    }
+    // Returns: 'none' | 'value' | 'type'
+    function rowChangeStatus(orionType, orionValue, csvType, csvValue) {
+      const tO = String(orionType ?? '').trim();
+      const vO = String(orionValue ?? '').trim();
+      const tC = String(csvType ?? '').trim();
+      const vC = String(csvValue ?? '').trim();
+
+      // Skip when either side missing
+      if (isMissing(tO) || isMissing(tC) || isMissing(vO) || isMissing(vC)) return 'none';
+
+      if (tO !== tC) return 'type';           // type mismatch → red
+      if (vO !== vC) return 'value';          // value diff only → green
+      return 'none';
+    }
+
+    // Render: Orion-only
+    function renderOrionOnly(rows) {
+      previewTable.classList.remove('orion-csv');
+      previewTable.classList.add('orion-only');
+
+      btnRegister.classList.add('hidden');        // hide register
+      addButtonContainer.classList.remove('hidden'); // show add button container
+      messageBox.className = 'section';
+
+      hasTypeMismatch = false;                    // reset in Orion-only mode
+
+      previewBody.innerHTML = '';
+      if (!Array.isArray(rows) || rows.length === 0) {
+        messageBox.textContent = '表示するデータがありません。';
+        return;
+      }
+
+      rows.forEach(item => {
+        const tr = document.createElement('tr');
+
+        // 項目名, Key, Orion type/value
+        const tdJp   = document.createElement('td'); tdJp.textContent   = item.jp_name ?? '(未指定)';
+        const tdKey  = document.createElement('td'); tdKey.textContent  = item.key ?? '';
+        const tdOty  = document.createElement('td'); tdOty.textContent  = item.type ?? '';
+        const tdOval = document.createElement('td'); tdOval.textContent = item.value ?? '';
+
+        // CSV columns (right side) – kept for alignment but hidden via CSS in orion-only
+        const tdCty  = document.createElement('td'); tdCty.className  = 'csv-col'; tdCty.textContent  = '—';
+        const tdCval = document.createElement('td'); tdCval.className = 'csv-col'; tdCval.textContent = '—';
+
+        // 操作(削除) – visible only in orion-only
+        const tdOps  = document.createElement('td'); tdOps.className  = 'ops-col';
+        const btnDel = document.createElement('button'); btnDel.textContent = '削除';
+        btnDel.addEventListener('click', () => onDeleteClicked(item.key, item.jp_name));
+        tdOps.appendChild(btnDel);
+
+        tr.append(tdJp, tdKey, tdOty, tdOval, tdCty, tdCval, tdOps);
+        previewBody.appendChild(tr);
+      });
+
+      messageBox.textContent = `Orionデータ取得完了: ${rows.length}件を表示。`;
+    }
+
+    // Render: Orion–CSV 
+    function renderOrionCsv(orionRows, csvRows) {
+      previewTable.classList.remove('orion-only');
+      previewTable.classList.add('orion-csv');
+
+      btnRegister.classList.remove('hidden');     // show big centered register
+      addButtonContainer.classList.add('hidden'); // hide add button
+      messageBox.className = 'section';
+
+      hasTypeMismatch = false;
+      mismatchedItems = []; // Reset mismatched items
+
+      previewBody.innerHTML = '';
+      const o = buildLookup(orionRows);
+      const c = buildLookup(csvRows);
+      const keys = new Set([...Object.keys(o), ...Object.keys(c)]);
+
+      if (keys.size === 0) {
+        messageBox.textContent = '表示するデータがありません。';
+        errorDialog.classList.remove('visible'); // Hide error dialog
+        return;
+      }
+
+      keys.forEach(k => {
+        const oItem = o[k];
+        const cItem = c[k];
+        const jp    = (oItem?.jp_name ?? cItem?.jp_name) ?? '(未指定)';
+        const key   = (oItem?.key     ?? cItem?.key)     ?? '';
+
+        const orionType  = oItem?.type  ?? '—';
+        const orionValue = oItem?.value ?? '—';
+        const csvType    = cItem?.type  ?? '—';
+        const csvValue   = cItem?.value ?? '—';
+
+        const tr = document.createElement('tr');
+
+        // decide highlight class
+        const status = rowChangeStatus(orionType, orionValue, csvType, csvValue);
+        if (status === 'type') {
+          tr.classList.add('row-type-mismatch');  // RED
+          hasTypeMismatch = true;
+          mismatchedItems.push(jp); // Track mismatched item name
+        } else if (status === 'value') {
+          tr.classList.add('row-value-changed');  // GREEN
+        }
+
+        // Left group: 項目名 / Key / Orion type / Orion data
+        const tdJp   = document.createElement('td'); tdJp.textContent   = jp;
+        const tdKey  = document.createElement('td'); tdKey.textContent  = key;
+        const tdOty  = document.createElement('td'); tdOty.textContent  = orionType;
+        const tdOval = document.createElement('td'); tdOval.textContent = orionValue;
+
+        // RIGHT group: CSV type / CSV data
+        const tdCty  = document.createElement('td'); tdCty.className  = 'csv-col'; tdCty.textContent  = csvType;
+        const tdCval = document.createElement('td'); tdCval.className = 'csv-col'; tdCval.textContent = csvValue;
+
+        // 操作列は orion-csv では非表示(CSSで隠す)– keep DOM for column alignment
+        const tdOps  = document.createElement('td'); tdOps.className  = 'ops-col';
+        const btnDel = document.createElement('button'); btnDel.textContent = '削除';
+        btnDel.addEventListener('click', () => onDeleteClicked(key, jp));
+        tdOps.appendChild(btnDel);
+
+        tr.append(tdJp, tdKey, tdOty, tdOval, tdCty, tdCval, tdOps);
+        previewBody.appendChild(tr);
+      });
+
+      // Show error dialog if there are type mismatches
+      if (hasTypeMismatch && mismatchedItems.length > 0) {
+        errorDialogContent.innerHTML = mismatchedItems.map(item => `${item}`).join('<br>');
+        errorDialog.classList.add('visible');
+      } else {
+        errorDialog.classList.remove('visible');
+      }
+
+      messageBox.textContent = `比較表示: Orion ${orionRows?.length ?? 0}件 / CSV ${csvRows?.length ?? 0}件`;
+    }
+
+    // Delete
+    async function onDeleteClicked(attrKey, jpName) {
+      if (!attrKey) return;
+      
+      // Single confirmation alert
+      const confirmMessage = `以下のデータは、Orion DB とマッピング ファイルから削除されます。\n${jpName} のデータを削除してもよろしいですか。`;
+      if (!confirm(confirmMessage)) return;
+
+      try {
+        const body = new URLSearchParams();
+        body.append('attrKey', attrKey);
+        const res = await fetch(API_DELETE_ATTR, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body.toString()
+        });
+        const json = await res.json();
+        if (json.status !== 'success') throw new Error(json.message || '削除に失敗しました');
+        messageBox.className = 'section';
+        messageBox.textContent = `削除成功: key=${attrKey}`;
+        await refreshPreview();
+      } catch (e) {
+        console.error(e);
+        messageBox.className = 'section error-message';
+        messageBox.textContent = `削除失敗: ${e.message}`;
+      }
+    }
+
+    // Add form
+    function showAddForm() {
+      addForm.style.display = 'block';
+      addJpName.value = '';
+      addKey.value    = '';
+      addType.value   = 'Text';
+      addValue.value  = '';
+      addForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    function hideAddForm() { addForm.style.display = 'none'; }
+
+    async function onAddConfirm() {
+      const jpName    = addJpName.value.trim();
+      const attrKey   = addKey.value.trim();
+      const attrType  = addType.value;
+      const attrValue = addValue.value.trim();
+
+      // Validation
+      if (jpName === '') {
+        alert('項目名を入力してください。');
+        return;
+      }
+      if (!/^[A-Za-z][A-Za-z0-9_]*$/.test(attrKey)) {
+        alert('Keyは英数字とアンダースコア、先頭は英字です。');
+        return;
+      }
+      if (attrType === 'Integer' && !/^-?\d+$/.test(attrValue)) {
+        alert('整数値を入力してください。');
+        return;
+      }
+      if (attrType === 'Float' && !/^-?\d+\.\d+$/.test(attrValue)) {
+        alert('小数(例:12.34)を入力してください。');
+        return;
+      }
+      if (attrType === 'DateTime' && !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(Z|[+\-]\d{2}:\d{2})?$/.test(attrValue)) {
+        alert('DateTimeはISO8601で入力してください(例:2025-10-01T00:00:00Z)。');
+        return;
+      }
+
+      // Single confirmation alert
+      const confirmMessage = `以下のデータが Orion DB とマッピング ファイルに追加されます。\nデータセットに ${jpName} を追加してもよろしいですか。`;
+      if (!confirm(confirmMessage)) return;
+
+      try {
+        const body = new URLSearchParams();
+        body.append('jpName', jpName);
+        body.append('attrKey', attrKey);
+        body.append('attrType', attrType);
+        body.append('attrValue', attrValue);
+        const res = await fetch(API_ADD_ATTR, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body.toString()
+        });
+        const json = await res.json();
+        if (json.status !== 'success') {
+          const hint = '(既存属性がある/タイプ不一致の可能性。別Keyを使うか、削除後に追加してください。)';
+          throw new Error((json.message || '追加に失敗しました') + ' ' + hint);
+        }
+
+        messageBox.className = 'section';
+        messageBox.textContent = `追加成功: ${jpName} / ${attrKey} / ${attrType}`;
+        hideAddForm();
+        await refreshPreview();
+      } catch (e) {
+        console.error(e);
+        messageBox.className = 'section error-message';
+        messageBox.textContent = `追加失敗: ${e.message}`;
+      }
+    }
+
+    // Register (push JSON) with type mismatch alert ---------- */
+    async function pushJsonToServer(targetUrl) {
+      const body = new URLSearchParams();
+      body.append('url', targetUrl);
+      const res = await fetch(API_PUSH_JSON, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString()
+      });
+      return res.json();
+    }
+
+    btnRegister.addEventListener('click', async () => {
+      // Check for type mismatch and show alert if present
+      if (hasTypeMismatch) {
+        alert('赤くハイライト表示された行は、データの型が一致していません。\nデータが同じ形式であることを確認してください。');
+        return;
+      }
+
+      messageBox.className = 'section';
+      messageBox.textContent = '外部サイトへ送信中...';
+
+      try {
+        const res = await pushJsonToServer(PUSH_TARGET_URL);
+        if (res.status === 'success') {
+          messageBox.textContent = `送信成功: HTTP ${res.http_code}. ソース: ${res.source}`;
+        } else {
+          // If backend blocked due to type mismatch, show the error explicitly
+          const code = res.error_code ? ` (${res.error_code})` : '';
+          messageBox.className = 'section error-message';
+          messageBox.textContent = `送信失敗: ${res.message || res.error || JSON.stringify(res)}${code}`;
+        }
+      } catch (e) {
+        messageBox.className = 'section error-message';
+        messageBox.textContent = '送信中にエラーが発生しました。コンソールを確認してください。';
+        console.error(e);
+      }
+    });
+
+    /* ---------- Preview refresh ---------- */
+    async function refreshPreview() {
+      const svc = fiwareSelect.value;
+      if (!svc) {
+        messageBox.className = 'section error-message';
+        messageBox.textContent = 'Fiware-Serviceを選択してください。';
+        return;
+      }
+      try {
+        messageBox.className = 'section';
+        messageBox.textContent = 'データを取得しています...';
+
+        await loadMappingReverse();
+
+        // Orion fetch
+        orionDataFormatB = await fetchOrionForService(svc);
+        const oRows = flattenFormatB(orionDataFormatB);
+
+        // Decide mode: orion-csv if CSV present, otherwise orion-only
+        if (csvDataFormatB && Array.isArray(csvDataFormatB) && csvDataFormatB.length > 0) {
+          const cRows = flattenFormatB(csvDataFormatB);
+          renderOrionCsv(oRows, cRows);
+        } else {
+          renderOrionOnly(oRows);
+        }
+      } catch (err) {
+        console.error(err);
+        messageBox.className = 'section error-message';
+        messageBox.textContent = '取得に失敗しました。コンソールを確認してください。';
+      }
+    }
+
+    /* ---------- CSV controls ---------- */
+    btnPreviewCsv.addEventListener('click', async () => {
+      const f = csvFileInput.files && csvFileInput.files[0];
+      if (!f) { alert('CSVファイルを選択してください。'); return; }
+      fileNameSpan.textContent = f.name;
+      messageBox.className = 'section';
+      messageBox.textContent = 'CSVをサーバへ送信しています...';
+      try {
+        const entities = await uploadCsvFileToServer(f);
+        csvDataFormatB = entities;
+        await refreshPreview();
+      } catch (err) {
+        console.error(err);
+        messageBox.className = 'section error-message';
+        messageBox.textContent = 'CSVアップロード/変換に失敗しました: ' + (err.message || err);
+      }
+    });
+
+    btnClearCsv.addEventListener('click', () => {
+      csvDataFormatB = null;
+      csvFileInput.value = '';
+      fileNameSpan.textContent = '';
+      previewBody.innerHTML = '';
+      btnRegister.classList.add('hidden');
+      addButtonContainer.classList.remove('hidden');
+      previewTable.classList.add('orion-only');
+      previewTable.classList.remove('orion-csv');
+      errorDialog.classList.remove('visible'); // Hide error dialog
+      messageBox.className = 'section';
+      messageBox.textContent = 'CSVプレビューをクリアしました。';
+      hasTypeMismatch = false;
+      mismatchedItems = []; // Reset mismatched items
+    });
+
+    /* ---------- Wire non-CSV buttons ---------- */
+    fiwareSelect.addEventListener('change', refreshPreview);
+    btnFetch.addEventListener('click', refreshPreview);
+    btnAdd.addEventListener('click', showAddForm);
+    btnAddConfirm.addEventListener('click', onAddConfirm);
+    btnAddCancel.addEventListener('click', hideAddForm);
+
+    /* ---------- Init ---------- */
+    (async () => {
+      if (fiwareSelect.value) {
+        await refreshPreview();
+      }
+    })();
+  </script>
+</body>
+</html>

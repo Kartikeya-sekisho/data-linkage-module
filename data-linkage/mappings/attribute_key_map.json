@@ -1,0 +1,166 @@
+{
+    "つくば市_人口": {
+        "key": "tsukubaCityPopulation",
+        "type": "Integer"
+    },
+    "つくば市_人口時点": {
+        "key": "tsukubaCityPopulationDate",
+        "type": "Text"
+    },
+    "つくば市_世帯数": {
+        "key": "tsukubaCityHouseholds",
+        "type": "Integer"
+    },
+    "国際研究学園都市_研究機関": {
+        "key": "kenkyuGakuenResearchInstitutions",
+        "type": "Integer"
+    },
+    "国際研究学園都市_研究関係者": {
+        "key": "kenkyuGakuenResearchPerson",
+        "type": "Integer"
+    },
+    "国際研究学園都市_博士号保持者": {
+        "key": "kenkyuGakuenDoctorateHolder",
+        "type": "Integer"
+    },
+    "国際研究学園都市_外国人": {
+        "key": "kenkyuGakuenForeigner",
+        "type": "Integer"
+    },
+    "国際研究学園都市_大学生": {
+        "key": "kenkyuGakuenUniversityStudents",
+        "type": "Integer"
+    },
+    "市域全体_出生率": {
+        "key": "cityBirthRate",
+        "type": "Float"
+    },
+    "市域全体_高齢化率": {
+        "key": "cityAgingRate",
+        "type": "Float"
+    },
+    "市域全体_全国平均高齢化率": {
+        "key": "cityNationalAverageAgingRate",
+        "type": "Float"
+    },
+    "市域全体_茨城県全体高齢化率": {
+        "key": "cityAgingRateOfIbarakiPrefecture",
+        "type": "Float"
+    },
+    "筑波地区_出生率": {
+        "key": "tsukubaDistrictBirthRate",
+        "type": "Float"
+    },
+    "筑波地区_高齢化率": {
+        "key": "tsukubaDistrictAgingRate",
+        "type": "Float"
+    },
+    "大穂地区_出生率": {
+        "key": "ohoDistrictBirthRate",
+        "type": "Float"
+    },
+    "大穂地区_高齢化率": {
+        "key": "ohoDistrictAgingRate",
+        "type": "Float"
+    },
+    "豊里地区_出生率": {
+        "key": "toyosatoDistrictBirthRate",
+        "type": "Float"
+    },
+    "豊里地区_高齢化率": {
+        "key": "toyosatoDistrictAgingRate",
+        "type": "Float"
+    },
+    "TX沿線地区_出生率": {
+        "key": "txDistrictBirthRate",
+        "type": "Float"
+    },
+    "TX沿線地区_高齢化率": {
+        "key": "txDistrictAgingRate",
+        "type": "Float"
+    },
+    "谷田部地区_出生率": {
+        "key": "yatabeDistrictBirthRate",
+        "type": "Float"
+    },
+    "谷田部地区_高齢化率": {
+        "key": "yatabeDistrictAgingRate",
+        "type": "Float"
+    },
+    "桜地区_出生率": {
+        "key": "sakuraDistrictBirthRate",
+        "type": "Float"
+    },
+    "桜地区_高齢化率": {
+        "key": "sakuraDistrictAgingRate",
+        "type": "Float"
+    },
+    "研究学園地区_出生率": {
+        "key": "kenkyuGakuenDistrictBirthRate",
+        "type": "Float"
+    },
+    "研究学園地区_高齢化率": {
+        "key": "kenkyuGakuenDistrictAgingRate",
+        "type": "Float"
+    },
+    "茎崎地区_出生率": {
+        "key": "kukizakiDistrictBirthRate",
+        "type": "Float"
+    },
+    "茎崎地区_高齢化率": {
+        "key": "kukizakiDistrictAgingRate",
+        "type": "Float"
+    },
+    "各地区_指標時点": {
+        "key": "districtReferenceDate",
+        "type": "Integer"
+    },
+    "基本データ_歳入": {
+        "key": "baseDataRevenueValue",
+        "type": "Integer"
+    },
+    "基本データ_歳入_指標時点": {
+        "key": "baseDataRevenueReference",
+        "type": "Integer"
+    },
+    "基本データ_歳出": {
+        "key": "baseDataExpenditureValue",
+        "type": "Integer"
+    },
+    "基本データ_歳出_指標時点": {
+        "key": "baseDataExpenditureReference",
+        "type": "Integer"
+    },
+    "基本データ_財政力指数": {
+        "key": "baseDataFinancialIndexValue",
+        "type": "Float"
+    },
+    "基本データ_財政力指数_指標時点": {
+        "key": "baseDataFinancialIndexReference",
+        "type": "Integer"
+    },
+    "基本データ_義務的経費": {
+        "key": "baseDataMandatoryExpensesValue",
+        "type": "Float"
+    },
+    "基本データ_義務的経費_指標時点": {
+        "key": "baseDataMandatoryExpensesReference",
+        "type": "Integer"
+    },
+    "基本データ_面積": {
+        "key": "baseDataAreaValue",
+        "type": "Float"
+    },
+    "基本データ_面積_指標時点": {
+        "key": "baseDataAreaReference",
+        "type": "Text"
+    },
+    "基本データ_人口密度": {
+        "key": "baseDataPopulationDensityValue",
+        "type": "Float"
+    },
+    "基本データ_人口密度_指標時点": {
+        "key": "baseDataPopulationDensityReference",
+        "type": "Text"
+    }
+}
