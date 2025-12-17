@@ -1,0 +1,65 @@
+##################################################
+# OS / Editor noise
+##################################################
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.tmp
+*.bak
+.vscode/
+.idea/
+
+##################################################
+# Node / PHP vendor (if added later)
+##################################################
+node_modules/
+vendor/
+
+##################################################
+# Docker / runtime artifacts
+##################################################
+*.pid
+
+##################################################
+# ---- data-linkage module ----
+##################################################
+
+# Ignore all runtime data
+data-linkage/data/
+data-linkage/data/**
+
+# Ignore logs
+data-linkage/logs/
+data-linkage/logs/**
+
+# Explicitly allow important config & mappings
+!data-linkage/config/
+!data-linkage/config/config.php
+!data-linkage/mappings/
+!data-linkage/mappings/attribute_key_map.json
+
+##################################################
+# ---- external-app ----
+##################################################
+
+# Ignore runtime logs
+external-app/api.log
+external-app/error.log
+
+# Ignore generated JSON data
+external-app/data.json
+external-app/received.json
+
+##################################################
+# ---- FIWARE / Docker ----
+##################################################
+
+# Keep docker compose files
+!fiware-orion/docker-compose.yml
+
+##################################################
+# PHP runtime caches (optional safety)
+##################################################
+*.log
+*.cache
