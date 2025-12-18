@@ -364,6 +364,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'orion_delete_attr') {
     exit;
 }
 
+
 // ACTION 6 — Add attribute (ensure entity via GET/CREATE, then POST)
 if (isset($_GET['action']) && $_GET['action'] === 'orion_add_attr') {
     $jpName    = trim($_POST['jpName']    ?? '');
@@ -371,16 +372,50 @@ if (isset($_GET['action']) && $_GET['action'] === 'orion_add_attr') {
     $attrType  = trim($_POST['attrType']  ?? '');
     $attrValue = $_POST['attrValue'] ?? '';
 
+    // Basic validations
     if ($jpName === '' || !preg_match('/^[A-Za-z][A-Za-z0-9_]*$/', $attrKey)) {
-        echo json_encode(['status' => 'error', 'message' => 'Invalid jpName or attrKey']);
+        echo json_encode(['status' => 'error', 'message' => 'Invalid jpName or attrKey'], JSON_UNESCAPED_UNICODE);
         exit;
     }
     $validTypes = ['Text', 'Integer', 'Float', 'DateTime'];
     if (!in_array($attrType, $validTypes, true)) {
-        echo json_encode(['status' => 'error', 'message' => 'Invalid attrType']);
+        echo json_encode(['status' => 'error', 'message' => 'Invalid attrType'], JSON_UNESCAPED_UNICODE);
         exit;
     }
 
+    // ---- Duplicate checks against mapping file ----
+    $map = load_attribute_map();
+    // (1) Duplicate jpName check
+    $jpExists = false;
+    if (isset($map[$jpName])) {
+        $jpExists = true;
+    } else {
+        // remove all whitespace to mimic mapper.php matching
+        $normalizedInput = preg_replace('/\s+/', '', $jpName);
+        foreach ($map as $existingJp => $info) {
+            $normalizedExisting = preg_replace('/\s+/', '', $existingJp);
+            if ($normalizedExisting === $normalizedInput) { $jpExists = true; break; }
+        }
+    }
+    if ($jpExists) {
+        echo json_encode([
+            'status'  => 'error',
+            'message' => "同じ項目名がすでに登録されています。\n別名に変更するか、既存項目を削除してください。"
+        ], JSON_UNESCAPED_UNICODE);
+        exit; // ABORT: do not POST to Orion
+    }
+
+    // (2) Duplicate key check (case-insensitive)
+    $existingJpForKey = find_jp_name_for_key($attrKey); // returns jpName or null
+    if ($existingJpForKey !== null) {
+        echo json_encode([
+            'status'  => 'error',
+            'message' => "同じシステム項目名がすでに登録されています（既存の項目名：{$existingJpForKey}）。\n別のシステム項目名を使用するか、既存項目を削除してください。"
+        ], JSON_UNESCAPED_UNICODE);
+        exit; // ABORT: do not POST to Orion
+    }
+
+    // ---- If no duplicates, continue with normal add flow ----
     app_log(sprintf("ACTION orion_add_attr START key=%s type=%s", $attrKey, $attrType), 'INFO');
 
     // Ensure entity exists
@@ -400,10 +435,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'orion_add_attr') {
         exit;
     }
 
-    // Coerce typed value
+    // Coerce typed value (Integer/Float/DateTime/Text)
     [$ok, $coerced] = coerce_typed_value($attrType, $attrValue);
     if (!$ok) {
-        echo json_encode(['status' => 'error', 'message' => "Value/type mismatch: {$coerced}"]);
+        echo json_encode(['status' => 'error', 'message' => "Value/type mismatch: {$coerced}"], JSON_UNESCAPED_UNICODE);
         exit;
     }
 
@@ -414,7 +449,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'orion_add_attr') {
         ]
     ];
 
-    // POST (create new attribute)
+    // POST (create new attribute or update if exists — but we already blocked duplicates above)
     $post = orion_post_attrs($typedAttr);
     if ($post['error']) {
         echo json_encode(['status' => 'error', 'message' => 'Orion POST failed', 'detail' => $post], JSON_UNESCAPED_UNICODE);
@@ -433,18 +468,17 @@ if (isset($_GET['action']) && $_GET['action'] === 'orion_add_attr') {
         exit;
     }
 
-    // Non-2xx (e.g., 422 because attribute already exists)
+    // Non-2xx
     echo json_encode([
         'status'  => 'error',
         'message' => 'Orion POST non-2xx (attribute may already exist or type conflict). Use a different Key or delete the attribute first.',
         'detail'  => $post
     ], JSON_UNESCAPED_UNICODE);
-
     app_log(sprintf("ACTION orion_add_attr ERROR http_code=%d error=%s",
         $post['http_code'] ?? 0, $post['error'] ?? 'none'), 'ERROR');
     exit;
 }
 
-// ACTION 6 - DEFAULT
+// ACTION 7 - DEFAULT
 echo json_encode(['status' => 'error', 'message' => 'Invalid action'], JSON_PRETTY_PRINT);
 exit;
