@@ -1,4 +1,3 @@
-
 <?php
 require_once __DIR__ . '/logger.php';
 require_once __DIR__ . '/mapper.php';
@@ -207,7 +206,7 @@ function convert_csv_to_format_b(array $rows, array &$debug): array {
   return ['entities' => $entities, 'skipped' => $skipped];
 }
 
-// Master pipeline: read, parse, validate; on validation error return preview + errors
+// MODIFIED: Master pipeline now returns empty preview on validation errors
 function run_csv_pipeline_debug($csvFilepath) {
   $debug = [];
   try {
@@ -228,30 +227,25 @@ function run_csv_pipeline_debug($csvFilepath) {
     $rows = csv_to_assoc_debug($matrix, $debug);
     $validation = validate_jp_csv_debug($rows, $debug);
 
-    // If validation failed, still produce a preview and return along with errors
+    // CHANGE: If validation failed, return empty preview (no conversion)
     if (!$validation['ok']) {
       csv_debug_add($debug, "validation failed: " . json_encode($validation['errors'], JSON_UNESCAPED_UNICODE));
-      $conv    = convert_csv_to_format_b($validation['rows'], $debug);
-      $formatB = $conv['entities'];
-      $skipped = $conv['skipped'] ?? [];
-
+      
+      // Clear any existing CSV data from session
       if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-      $_SESSION['latest_csv_json'] = $formatB;
+      unset($_SESSION['latest_csv_json']);
 
-      $entityCount = is_array($formatB) ? count($formatB) : 0;
-      $attrCount = 0;
-      foreach (($formatB ?? []) as $e) { $attrCount += count($e['attributes'] ?? []); }
       app_log(sprintf(
-        "CSV_PIPELINE SUMMARY status=error(preview) entities=%d attributes=%d skipped=%d; details=%s",
-        $entityCount, $attrCount, count($skipped), implode(' | ', $validation['errors'])
+        "CSV_PIPELINE SUMMARY status=error entities=0 attributes=0; details=%s",
+        implode(' | ', $validation['errors'])
       ), 'ERROR');
 
       return [
         'status'  => 'error',
         'message' => 'Validation failed',
         'errors'  => $validation['errors'],
-        'preview' => $formatB,
-        'skipped_jp_names' => $skipped,
+        'preview' => [], // Empty preview - no data shown
+        'skipped_jp_names' => [],
         'debug'   => $debug
       ];
     }

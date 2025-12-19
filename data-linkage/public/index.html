@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>Orionデータプレビュー(編集:追加・削除)</title>
+  <title>データ連携基盤・データプレビュー</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     /* Basic layout and typography */
@@ -621,6 +620,7 @@ csvFileInput.addEventListener('change', () => {
   fileStatus.textContent = f ? f.name : 'ファイルが選択されていません';
 });
 
+/* MODIFIED: CSV preview - no data display on validation errors */
 btnPreviewCsv.addEventListener('click', async () => {
   const f = csvFileInput.files && csvFileInput.files[0];
   if (!f) { alert('CSVファイルを選択してください。'); return; }
@@ -639,11 +639,12 @@ btnPreviewCsv.addEventListener('click', async () => {
       const errors  = Array.isArray(json.errors) ? json.errors : [];
       const preview = Array.isArray(json.preview) ? json.preview : [];
 
-      // Show preview even on error (duplicates allowed)
-      if (preview.length > 0) {
-        csvDataFormatB = preview;
-        await refreshPreview();
-      }
+      // CHANGE: Clear CSV data state and do not show preview on validation error
+      csvDataFormatB = null;
+
+      // Revert to Orion-only display
+      const oRows = flattenFormatB(orionDataFormatB);
+      renderOrionOnly(oRows);
 
       // CSV error dialog with count
       const count = errors.length;
@@ -652,7 +653,7 @@ btnPreviewCsv.addEventListener('click', async () => {
       csvErrorDialog.classList.add('visible');
 
       messageBox.className = 'section error-message';
-      messageBox.textContent = 'CSVの検証でエラーが発生しました。';
+      messageBox.textContent = 'CSVの検証でエラーが発生しました。エラーを修正してから再度読み込んでください。';
       hasBlockingErrors = json.blocking === true || json.can_push === false;
       updateRegisterState();
       return;
@@ -718,3 +719,4 @@ btnAddCancel.addEventListener('click', hideAddForm);
 })();
 </script>
 </body>
+</html>
