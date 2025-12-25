@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 header("Content-Type: application/json; charset=UTF-8");
@@ -248,7 +247,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'upload_csv') {
 
   if (($result['status'] ?? '') !== 'success') {
     $errors  = $result['errors'] ?? [$result['message'] ?? 'unknown'];
-    $preview = $result['preview'] ?? []; // preview provided even on validation error
+    $preview = $result['preview'] ?? []; // preview provided on non-fatal errors
     set_blocking_error_state('csv', $errors);
     app_log("ACTION upload_csv ERROR: " . ($result['message'] ?? 'unknown'), 'ERROR');
 
@@ -263,8 +262,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'upload_csv') {
     ], JSON_UNESCAPED_UNICODE);
     exit;
   }
-
+  
+  // SUCCESS (may have non-fatal errors that must block push_json)
   $preview = $result['preview'] ?? [];
+  $previewRows = $result['preview_rows'] ?? [];
+  $uiErrorsResp = $result['ui_errors'] ?? [];
+  $skipped = $result['skipped_jp_names'] ?? [];
+
   $attrCount = 0;
   foreach (($preview ?? []) as $e) { $attrCount += count($e['attributes'] ?? []); }
   $skipped = $result['skipped_jp_names'] ?? [];
@@ -273,14 +277,33 @@ if (isset($_GET['action']) && $_GET['action'] === 'upload_csv') {
   }
   app_log(sprintf("ACTION upload_csv SUCCESS entities=%d attributes=%d", count($preview ?? []), $attrCount), 'INFO');
 
-  clear_error_state();
+  // Decide blocking based on non-fatal errors
+  $hasNonFatalErrors = 
+  !empty($uiErrorsResp['symbols']) ||
+  !empty($uiErrorsResp['missing_name']) ||
+  !empty($uiErrorsResp['type_mismatch']) ||
+  !empty($uiErrorsResp['skipped']) ||
+  !empty($uiErrorsResp['multiline']);
+
+  if ($hasNonFatalErrors) {
+    // Block push_json
+    set_blocking_error_state('csv_nonfatal', [
+      'symbols_count'=> count($uiErrorsResp['symbols'] ?? []),
+      'missing_name_count'=> count($uiErrorsResp['missing_name'] ?? []),
+      'type_mismatch_count'=> count($uiErrorsResp['type_mismatch'] ?? []),
+      'skipped_count'=> count($uiErrorsResp['skipped'] ?? [])
+    ]);
+  } else {
+    clear_error_state();
+  }
 
   echo json_encode([
-    'status'           => 'success',
-    'preview'          => $preview,
-    'skipped_jp_names' => $skipped,
-    'blocking'         => false,
-    'can_push'         => true
+    'status'=> 'success',
+    'preview'=> $preview,
+    'preview_rows'=> $previewRows,
+    'ui_errors'=> $uiErrorsResp,
+    'blocking'=> $hasNonFatalErrors,
+    'can_push'=> $hasNonFatalErrors ? false : true
   ], JSON_UNESCAPED_UNICODE);
   exit;
 }
@@ -290,6 +313,24 @@ if (isset($_GET['action']) && $_GET['action'] === 'push_json') {
   $targetUrl = $_POST['url'] ?? '';
   if (!$targetUrl) {
     echo json_encode(['status' => 'error', 'error_code' => 'MISSING_URL', 'message' => 'Missing url'], JSON_PRETTY_PRINT);
+    exit;
+  }
+
+  // Block for non fatal errors
+  if (!empty($_SESSION['latest_csv_has_errors'])) {
+    $uiErr = $_SESSION['latest_csv_ui_errors'] ?? [];
+    app_log("ACTION push_json BLOCKED due to CSV UI errors (non-fatal): 
+      symbols=" . count($uiErr['symbols'] ?? []) . 
+      "missing_name=" . count($uiErr['missing_name'] ?? []) . 
+      "type_mismatch=" . count($uiErr['type_mismatch'] ?? []) .
+      "skipped=" . count($uiErr['skipped'] ?? []), 'ERROR');
+
+    echo json_encode([
+      'status'=> 'error',
+      'error_code'=> 'BLOCKED_BY_CSV_ERRORS',
+      'message'=> '未解決のエラーがあるため、JSONの送信はできません。',
+      'ui_errors' => $uiErr
+    ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     exit;
   }
 

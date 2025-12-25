@@ -1,4 +1,3 @@
-
 <?php
 // Simple type detection for raw values
 function detect_value_type($v) {

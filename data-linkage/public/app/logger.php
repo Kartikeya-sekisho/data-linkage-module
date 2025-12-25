@@ -1,4 +1,3 @@
-
 <?php
 function app_log(string $message, string $level = 'INFO'): void {
   $cfg = require __DIR__ . '/../../config/config.php';

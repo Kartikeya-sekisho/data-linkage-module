@@ -1,5 +1,19 @@
-
 <?php
+
+// Helper function to check for symbol in CSV value data
+function contains_unverified_symbols(string $v): bool {
+  if ($v === '') return false;
+  // replace '/' wit empty to exclude detection
+  $w = str_replace('/', '', $v);
+  return (bool)preg_match('/\p{P}/u', $w); // unicode for punctuations
+}
+
+// Validate YYYY/MM/DD format for '/'
+function is_yyyy_mm_dd(string $v): bool {
+  if (strpos($v, '/') === false) return false;
+  if (!preg_match('/^(?<y>\d{4})\/(?<m>\d{2})\/(?<d>\d{2})$/', $v, $m)) return false;
+  return checkdate((int)$m['m'], (int)$m['d'], (int)$m['y']);
+}
 // Integer value regex
 function is_integer_value($v): bool {
   return preg_match('/^\-?\d+$/', trim((string)$v)) === 1;

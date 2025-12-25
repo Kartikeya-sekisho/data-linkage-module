@@ -1,4 +1,3 @@
-
 <?php
 return [
   // Orion base URL

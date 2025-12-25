@@ -1,4 +1,3 @@
-
 <?php
 require_once __DIR__ . '/logger.php';
 require_once __DIR__ . '/mapper.php';

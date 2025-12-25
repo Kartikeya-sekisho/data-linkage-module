@@ -162,5 +162,9 @@
     "基本データ_人口密度_指標時点": {
         "key": "baseDataPopulationDensityReference",
         "type": "Text"
+    },
+    "sampleData": {
+        "key": "sampleData",
+        "type": "Text"
     }
 }

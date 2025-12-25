@@ -1,4 +1,3 @@
-
 <?php
 // Load attribute mapping file (JSON object of jpName -> {key, type})
 function load_attribute_map(): array {

@@ -35,6 +35,12 @@
     /* Highlighting logic */
     td.cell-value-changed { background-color: #a0e3af; }
     td.cell-type-mismatch { background-color: #fab3b9; }
+    td.cell-symbol-error { background-color: #fab3b9;}
+    td.cell-multiline-error {background-color: #fab3b9;}
+
+    /* Multi row preview */
+    td.csv-col.value-cell {white-space: pre-line; max-height: 6em;}
+    td.ori-col.value-cell {white-space: pre-line; max-height: 6em;}
 
     /* File picker visual tweaks */
     .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
@@ -111,25 +117,47 @@
   <div class="section" aria-labelledby="preview">
     <h2 id="preview">プレビュー</h2>
 
+    <!-- Symbols error dialog (counted) -->
+    <div id="symbolsErrorDialog" class="error-dialog" aria-live="polite">
+      <button class="error-dialog-close" onclick="document.getElementById('symbolsErrorDialog').classList.remove('visible')" aria-label="閉じる">×</button>
+      <div id="symbolsErrorDialogTitle" class="error-dialog-title">未検証のシンボルが存在する（0件）：</div>
+      <div class="error-dialog-content" id="symbolsErrorDialogContent"></div>
+    </div>
+
+    <!-- Missing-name error dialog (counted) -->
+    <div id="missingNameErrorDialog" class="error-dialog" aria-live="polite">
+      <button class="error-dialog-close" onclick="document.getElementById('missingNameErrorDialog').classList.remove('visible')" aria-label="閉じる">×</button>
+      <div id="missingNameErrorDialogTitle" class="error-dialog-title">CSV ファイル内に項目名のないデータが見つかりました。（0件）：</div>
+      <div class="error-dialog-content" id="missingNameErrorDialogContent"></div>
+    </div>
+
     <!-- Type mismatch error dialog (counted) -->
-    <div id="errorDialog" class="error-dialog">
-      <button class="error-dialog-close" onclick="document.getElementById('errorDialog').classList.remove('visible')" aria-label="閉じる">×</button>
-      <div id="errorDialogTitle" class="error-dialog-title">データ型の不一致が検出されました。以下の項目にエラーがあります（0件）：</div>
-      <div class="error-dialog-content" id="errorDialogContent"></div>
+    <div id="typeMismatchErrorDialog" class="error-dialog" aria-live="polite">
+      <button class="error-dialog-close" onclick="document.getElementById('typeMismatchErrorDialog').classList.remove('visible')" aria-label="閉じる">×</button>
+      <div id="typeMismatchErrorDialogTitle" class="error-dialog-title">データ型の不一致が検出されました（0件）：</div>
+      <div class="error-dialog-content" id="typeMismatchErrorDialogContent"></div>
     </div>
 
-    <!-- Mapping missing error dialog (counted) -->
-    <div id="mappingErrorDialog" class="error-dialog">
-      <button class="error-dialog-close" onclick="document.getElementById('mappingErrorDialog').classList.remove('visible')" aria-label="閉じる">×</button>
-      <div id="mappingErrorDialogTitle" class="error-dialog-title">データ連携基盤未設定の項目が検出されました（0件）：</div>
-      <div class="error-dialog-content" id="mappingErrorDialogContent"></div>
+    <!-- Skipped/Unmapped error dialog (counted) -->
+    <div id="skippedErrorDialog" class="error-dialog" aria-live="polite">
+      <button class="error-dialog-close" onclick="document.getElementById('skippedErrorDialog').classList.remove('visible')" aria-label="閉じる">×</button>
+      <div id="skippedErrorDialogTitle" class="error-dialog-title">読み込み対象外（スキップ）（0件）：</div>
+      <div class="error-dialog-content" id="skippedErrorDialogContent"></div>
     </div>
 
-    <!-- CSV validation error dialog (counted) -->
-    <div id="csvErrorDialog" class="error-dialog">
+    <!-- CSV fatal validation error dialog (counted) -->
+    <div id="csvErrorDialog" class="error-dialog" aria-live="polite">
       <button class="error-dialog-close" onclick="document.getElementById('csvErrorDialog').classList.remove('visible')" aria-label="閉じる">×</button>
       <div id="csvErrorDialogTitle" class="error-dialog-title">CSVエラー（0件）：</div>
       <div class="error-dialog-content" id="csvErrorDialogContent"></div>
+    </div>
+
+    <!-- Multiline CSV values error dialog -->
+    <div id="multilineErrorDialog" class="error-dialog" aria-live="polite">
+      <button class="error-dialog-close" onclick="document.getElementById('multilineErrorDialog').classList.remove('visible')"
+        aria-label="閉じる">x</button>
+      <div id="multilineErrorDialogTitle" class="error-dialog-title">取込データには複数の行が含まれます。（0件）：</div>
+      <div id="multilineErrorDialogContent" class="error-dialog-content"></div>
     </div>
 
     <!-- Main preview table -->
@@ -222,13 +250,26 @@ const btnRegister  = document.getElementById('btnRegister');
 
 const messageBox   = document.getElementById('message');
 
-const errorDialog        = document.getElementById('errorDialog');
-const errorDialogTitle   = document.getElementById('errorDialogTitle');
-const errorDialogContent = document.getElementById('errorDialogContent');
+/* Error dialogs */
+const symbolsErrorDialog        = document.getElementById('symbolsErrorDialog');
+const symbolsErrorDialogTitle   = document.getElementById('symbolsErrorDialogTitle');
+const symbolsErrorDialogContent = document.getElementById('symbolsErrorDialogContent');
 
-const mappingErrorDialog        = document.getElementById('mappingErrorDialog');
-const mappingErrorDialogTitle   = document.getElementById('mappingErrorDialogTitle');
-const mappingErrorDialogContent = document.getElementById('mappingErrorDialogContent');
+const missingNameErrorDialog        = document.getElementById('missingNameErrorDialog');
+const missingNameErrorDialogTitle   = document.getElementById('missingNameErrorDialogTitle');
+const missingNameErrorDialogContent = document.getElementById('missingNameErrorDialogContent');
+
+const typeMismatchErrorDialog        = document.getElementById('typeMismatchErrorDialog');
+const typeMismatchErrorDialogTitle   = document.getElementById('typeMismatchErrorDialogTitle');
+const typeMismatchErrorDialogContent = document.getElementById('typeMismatchErrorDialogContent');
+
+const skippedErrorDialog        = document.getElementById('skippedErrorDialog');
+const skippedErrorDialogTitle   = document.getElementById('skippedErrorDialogTitle');
+const skippedErrorDialogContent = document.getElementById('skippedErrorDialogContent');
+
+const multilineErrorDialog        = document.getElementById('multilineErrorDialog');
+const multilineErrorDialogTitle   = document.getElementById('multilineErrorDialogTitle');
+const multilineErrorDialogContent = document.getElementById('multilineErrorDialogContent');
 
 const csvErrorDialog        = document.getElementById('csvErrorDialog');
 const csvErrorDialogTitle   = document.getElementById('csvErrorDialogTitle');
@@ -243,6 +284,8 @@ let mappingLoaded    = false;
 
 let hasTypeMismatch   = false;
 let hasBlockingErrors = false;
+let symbolSetGlobal = new Set();
+let multilineSetGlobal = new Set();
 
 /* Utility to update register button availability */
 function updateRegisterState() {
@@ -291,7 +334,7 @@ function flattenFormatB(entities) {
         jp_name: jpName,
         key:     attrKey,
         type:    attr.type ?? 'Text',
-        value:   attr.value !== undefined ? attr.value : ''
+        value:   attr.value !== undefined ? attr.value : '—'
       });
     });
   });
@@ -344,9 +387,9 @@ function renderOrionOnly(rows) {
     const tdJp  = document.createElement('td'); tdJp.textContent  = item.jp_name ?? '(未指定)';
     const tdKey = document.createElement('td'); tdKey.textContent = item.key ?? '';
     const tdOty = document.createElement('td'); tdOty.textContent = item.type ?? '';
-    const tdOval= document.createElement('td'); tdOval.textContent= item.value ?? '';
+    const tdOval= document.createElement('td'); tdOval.className = 'ori-col value-cell'; tdOval.textContent= item.value ?? '';
     const tdCty = document.createElement('td'); tdCty.className = 'csv-col'; tdCty.textContent = '—';
-    const tdCval= document.createElement('td'); tdCval.className= 'csv-col'; tdCval.textContent = '—';
+    const tdCval= document.createElement('td'); tdCval.className= 'csv-col value-cell'; tdCval.textContent = '—';
     const tdOps = document.createElement('td'); tdOps.className = 'ops-col';
     const btnDel= document.createElement('button'); btnDel.textContent = '削除';
     btnDel.addEventListener('click', () => onDeleteClicked(item.key, item.jp_name));
@@ -360,7 +403,7 @@ function renderOrionOnly(rows) {
 }
 
 /* Render Orion–CSV comparison mode with type mismatch highlighting */
-function renderOrionCsv(orionRows, csvRows) {
+function renderOrionCsv(orionRows, csvRows, symbolSet = symbolSetGlobal) {
   previewTable.classList.remove('orion-only');
   previewTable.classList.add('orion-csv');
   btnRegister.classList.remove('hidden');
@@ -377,7 +420,7 @@ function renderOrionCsv(orionRows, csvRows) {
 
   if (keys.size === 0) {
     messageBox.textContent = '表示するデータがありません。';
-    errorDialog.classList.remove('visible');
+    typeMismatchErrorDialog.classList.remove('visible');
     updateRegisterState();
     return;
   }
@@ -396,15 +439,21 @@ function renderOrionCsv(orionRows, csvRows) {
     const tdJp = document.createElement('td'); tdJp.textContent = jp;
     const tdKey= document.createElement('td'); tdKey.textContent = key;
     const tdOty= document.createElement('td'); tdOty.textContent = orionType;
-    const tdOval=document.createElement('td'); tdOval.textContent= orionValue;
+    const tdOval=document.createElement('td'); tdOval.className = 'csv-col value-cell'; tdOval.textContent= orionValue;
 
     const tdCty = document.createElement('td'); tdCty.className = 'csv-col'; tdCty.textContent = csvType;
-    const tdCval= document.createElement('td'); tdCval.className= 'csv-col'; tdCval.textContent = csvValue;
+    const tdCval= document.createElement('td'); tdCval.className= 'csv-col value-cell'; tdCval.textContent = csvValue;
 
-    const tdOps = document.createElement('td'); tdOps.className = 'ops-col';
-    const btnDel= document.createElement('button'); btnDel.textContent = '削除';
-    btnDel.addEventListener('click', () => onDeleteClicked(key, jp));
-    tdOps.appendChild(btnDel);
+    // highlight if 項目名 in ui_errors.symbols
+    if (symbolSet && symbolSet.has(jp)) {
+      tdCty.classList.add('cell-symbol-error');
+      tdCval.classList.add('cell-symbol-error');
+    }
+    // highlight if 項目名 in ui_errors.symbols
+    if (multilineSetGlobal && multilineSetGlobal.has(jp)) {
+      tdCty.classList.add('cell-multiline-error');
+      tdCval.classList.add('cell-multiline-error')
+    }
 
     const status = rowChangeStatus(orionType, orionValue, csvType, csvValue);
     if (status === 'type') {
@@ -417,20 +466,23 @@ function renderOrionCsv(orionRows, csvRows) {
       tdCval.classList.add('cell-value-changed');
     }
 
+    const tdOps = document.createElement('td'); tdOps.className = 'ops-col';
+    const btnDel= document.createElement('button'); btnDel.textContent = '削除';
+    btnDel.addEventListener('click', () => onDeleteClicked(key, jp));
+    tdOps.appendChild(btnDel);
+
     tr.append(tdJp, tdKey, tdOty, tdOval, tdCty, tdCval, tdOps);
     previewBody.appendChild(tr);
   });
 
-  // Type mismatch dialog with count in specified format
+  // Type mismatch dialog with count
   const mismatchCount = mismatchedItems.length;
   if (mismatchCount > 0) {
-    if (errorDialogTitle) {
-      errorDialogTitle.textContent = `データ型の不一致が検出されました。以下の項目にエラーがあります（${mismatchCount}件）：`;
-    }
-    errorDialogContent.innerHTML = mismatchedItems.map(item => `${item}`).join('<br>');
-    errorDialog.classList.add('visible');
+    typeMismatchErrorDialogTitle.textContent = `データ型の不一致が検出されました（${mismatchCount}件）：`;
+    typeMismatchErrorDialogContent.innerHTML = mismatchedItems.map(item => `${item}`).join('<br>');
+    typeMismatchErrorDialog.classList.add('visible');
   } else {
-    errorDialog.classList.remove('visible');
+    typeMismatchErrorDialog.classList.remove('visible');
   }
 
   messageBox.textContent = `比較表示: データ連携基盤 ${orionRows?.length ?? 0}件 / CSV ${csvRows?.length ?? 0}件`;
@@ -589,6 +641,7 @@ async function refreshPreview() {
     orionDataFormatB = result.preview || [];
     const oRows = flattenFormatB(orionDataFormatB);
 
+    // If CSV already loaded, compare; otherwise show Orion-only
     if (csvDataFormatB && Array.isArray(csvDataFormatB) && csvDataFormatB.length > 0) {
       const cRows = flattenFormatB(csvDataFormatB);
       renderOrionCsv(oRows, cRows);
@@ -620,7 +673,7 @@ csvFileInput.addEventListener('change', () => {
   fileStatus.textContent = f ? f.name : 'ファイルが選択されていません';
 });
 
-/* MODIFIED: CSV preview - no data display on validation errors */
+/* CSV preview (success shows preview and all non-fatal dialogs; fatal shows CSV error dialog) */
 btnPreviewCsv.addEventListener('click', async () => {
   const f = csvFileInput.files && csvFileInput.files[0];
   if (!f) { alert('CSVファイルを選択してください。'); return; }
@@ -635,21 +688,26 @@ btnPreviewCsv.addEventListener('click', async () => {
     if (!res.ok) throw new Error('Upload Failed');
     const json = await res.json();
 
+    // Close all non-fatal dialogs before showing fresh results
+    symbolsErrorDialog.classList.remove('visible');
+    missingNameErrorDialog.classList.remove('visible');
+    typeMismatchErrorDialog.classList.remove('visible');
+    skippedErrorDialog.classList.remove('visible');
+    csvErrorDialog.classList.remove('visible');
+    multilineErrorDialog.classList.remove('visible');
+
     if (json.status === 'error') {
       const errors  = Array.isArray(json.errors) ? json.errors : [];
-      const preview = Array.isArray(json.preview) ? json.preview : [];
+      const count   = errors.length;
 
-      // CHANGE: Clear CSV data state and do not show preview on validation error
+      // Clear CSV data state and revert to Orion-only display
       csvDataFormatB = null;
-
-      // Revert to Orion-only display
-      const oRows = flattenFormatB(orionDataFormatB);
+      const oRows = flattenFormatB(orionDataFormatB || []);
       renderOrionOnly(oRows);
 
-      // CSV error dialog with count
-      const count = errors.length;
-      csvErrorDialogTitle.textContent   = `CSVエラー（${count}件）：`;
-      csvErrorDialogContent.innerHTML   = errors.map(e => `${e}`).join('<br>');
+      // Fatal CSV errors dialog
+      csvErrorDialogTitle.textContent = `CSVエラー（${count}件）：`;
+      csvErrorDialogContent.innerHTML = errors.map(e => `${e}`).join('<br>');
       csvErrorDialog.classList.add('visible');
 
       messageBox.className = 'section error-message';
@@ -659,19 +717,83 @@ btnPreviewCsv.addEventListener('click', async () => {
       return;
     }
 
-    // Success: store preview and show mapping-missing dialog with count
+    // Success: store CSV preview and show non-fatal dialogs
     csvDataFormatB = json.preview || [];
-    const skipped = json.skipped_jp_names || [];
-    if (Array.isArray(skipped) && skipped.length > 0) {
-      const skippedCount = skipped.length;
-      mappingErrorDialogTitle.textContent = `データ連携基盤未設定の項目が検出されました（${skippedCount}件）：`;
-      mappingErrorDialogContent.innerHTML = skipped.map(s => `${s}`).join('<br>');
-      mappingErrorDialog.classList.add('visible');
-    } else {
-      mappingErrorDialog.classList.remove('visible');
+
+    // Prefer ui_errors buckets
+    const ui = json.ui_errors || {};
+    const symbols = Array.isArray(ui.symbols) ? ui.symbols : [];
+    const missing = Array.isArray(ui.missing_name) ? ui.missing_name : [];
+    const tmItems = Array.isArray(ui.type_mismatch) ? ui.type_mismatch : [];
+    const skipped = Array.isArray(ui.skipped) ? ui.skipped : (json.skipped_jp_names || []);
+    const multiline = Array.isArray(ui.multiline) ? ui.multiline : [];
+
+    // Symbols dialog
+    if (symbols.length > 0) {
+      symbolsErrorDialogTitle.textContent = `未検証のシンボルが存在する ${symbols.length}件 ：`;
+      symbolsErrorDialogContent.innerHTML = symbols.map(s => `${s}`).join('<br>');
+      symbolsErrorDialog.classList.add('visible');
     }
+
+    // Missing-name dialog
+    if (missing.length > 0) {
+      missingNameErrorDialogTitle.textContent = `CSV ファイル内に項目名のないデータが見つかりました。${missing.length}件 ：`;
+      missingNameErrorDialogContent.innerHTML = missing.map(m => `行${m.line}: ${m.value}`).join('<br>');
+      missingNameErrorDialog.classList.add('visible');
+    }
+
+    // Type mismatch dialog (from ui_errors.type_mismatch; table highlighting is separate)
+    if (tmItems.length > 0) {
+      typeMismatchErrorDialogTitle.textContent = `データ型の不一致が検出されました（${tmItems.length}件）：`;
+      typeMismatchErrorDialogContent.innerHTML = tmItems.map(m => `行${m.line}（${m['項目名'] || '(未指定)'}）: ${m.message}`).join('<br>');
+      typeMismatchErrorDialog.classList.add('visible');
+    }
+
+    // Skipped/unmapped dialog
+    if (Array.isArray(skipped) && skipped.length > 0) {
+      skippedErrorDialogTitle.textContent = `読み込み対象外（スキップ） ${skipped.length}件 ：`;
+      skippedErrorDialogContent.innerHTML = skipped.map(s => `${s}`).join('<br>');
+      skippedErrorDialog.classList.add('visible');
+    }
+
+    // multiline dialog
+    if (multiline.length > 0) {
+      multilineErrorDialogTitle.textContent = `取込データには複数の行が含まれます。${multiline.length}件：`;
+      multilineErrorDialogContent.innerHTML = multiline.map(m => `${m['項目名'] ?? '(未指定)'}`).join('<br>');
+      multilineErrorDialog.classList.add('visible');
+    }
+
+    // Symbol set
+    const symbolSet = new Set(symbols);
+    symbolSetGlobal = symbolSet;
+
+    multilineSetGlobal = new Set(
+      multiline.map(m => m['項目名']).filter(Boolean)
+    );
+
+    // Render immediately (CSV vs Orion) with preview_rows fallback
+    await loadMappingReverse(); // ensure mapping for jp_name resolution
+
+    const oRows = flattenFormatB(orionDataFormatB || []);
+    let cRows   = flattenFormatB(csvDataFormatB);
+
+    if (!Array.isArray(cRows) || cRows.length === 0) {
+      const pr = json.preview_rows || [];
+      cRows = pr.map(r => ({
+        jp_name: r['項目名'] ?? '(未指定)',
+        key:     r['mapped_key'] ?? '',
+        type:    r['取込データ（型）'] ?? '—',
+        value:   r['取込データ（値）'] ?? '—'
+      }));
+    }
+
+    renderOrionCsv(oRows, cRows, symbolSet);
+
+    // Button state matches backend policy (block push on non-fatal errors)
     hasBlockingErrors = !!json.blocking;
     updateRegisterState();
+
+    // Optional: refresh Orion/mapping afterward; preview is already visible
     await refreshPreview();
   } catch (err) {
     console.error(err);
@@ -694,9 +816,12 @@ btnClearCsv.addEventListener('click', () => {
   previewTable.classList.remove('orion-csv');
 
   // Close all dialogs
-  errorDialog.classList.remove('visible');
-  mappingErrorDialog.classList.remove('visible');
+  symbolsErrorDialog.classList.remove('visible');
+  missingNameErrorDialog.classList.remove('visible');
+  typeMismatchErrorDialog.classList.remove('visible');
+  skippedErrorDialog.classList.remove('visible');
   csvErrorDialog.classList.remove('visible');
+  multilineErrorDialog.classList.remove('visible');
 
   messageBox.className = 'section';
   messageBox.textContent = 'CSVプレビューをクリアしました。';
